@@ -19,7 +19,7 @@ a _PID controller_ enhances the car's control system, ensuring smooth and accura
 - Ong Si Hui (2201945)
 - Pang Zi Jian, Adrian (2200692)
 - Nur Hakeem Bin Azman (2201052)
-- Joshua Lim ()
+- Joshua Lim (696969696969)
 - Shaun Tay ()
   
 ## Features
