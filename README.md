@@ -1,21 +1,20 @@
 # INF2004-Embedded-Micro-mouse
 
 Develop a robot car that navigates a _predefined track_, _efficiently avoiding obstacles_ and _recognizing barcodes_ using infrared sensors. The integration of
-a _PID controller_ enhances the car's control system, ensuring smooth and accurate motion during navigation and barcode scanning.
+a _PID controller_ enhances the car's control system, ensuring smooth and accurate motion during navigation and _barcode scanning_.
 
 ## Table of Contents
 
-- [Introduction](#introduction)
+- [Team Members](#introduction)
 - [Features](#features)
 - [Getting Started](#getting-started)
   - [Prerequisites](#prerequisites)
   - [Installation](#installation)
 - [Usage](#usage)
-- [Contributing](#contributing)
-- [License](#license)
+- [Additional Resources](#resources)
 - [Acknowledgments](#acknowledgments)
 
-## Introduction
+## Team Members
 
 
 
@@ -38,3 +37,12 @@ Meow Meow Meow Meow Meow
 
 Woof Woof Woof Woof 
 
+### Installation
+
+Woof Woof Woof Woof 
+
+## Usage
+
+## Additional Resources
+
+## Acknowledgments
