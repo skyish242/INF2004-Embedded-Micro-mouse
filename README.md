@@ -55,7 +55,7 @@ Hello World
 **Barcode Reading**<br>
 **PID Controller for Navigation**<br>
 **Mapping Algorithm**<br>
-**Tutorials**<br>
+**Line Tracking**<br>
 https://www.youtube.com/watch?v=z9sm6G5alp8
 
 ## Acknowledgments
