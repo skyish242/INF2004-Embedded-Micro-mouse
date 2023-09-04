@@ -24,12 +24,12 @@ a _PID controller_ enhances the car's control system, ensuring smooth and accura
   
 ## Features
 
-<u>**Interactive UI**</u><br>
-<u>**Objection Detection and Avoidance**</u><br>
-<u>**Line Tracking with Infrared Sensor**</u><br>
-<u>**Barcode Reading with Infrared Sensor**</u><br>
-<u>**PID Controller for Navigation**</u><br>
-<u>**Maze Mapping Algorithm**</u>
+**Interactive UI**<br>
+**Objection Detection and Avoidance**<br>
+**Line Tracking with Infrared Sensor**<br>
+**Barcode Reading with Infrared Sensor**<br>
+**PID Controller for Navigation**<br>
+**Maze Mapping Algorithm**
 
 ## Getting Started
 
