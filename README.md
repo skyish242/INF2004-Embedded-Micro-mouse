@@ -59,7 +59,7 @@ Hello World
 https://www.youtube.com/watch?v=z9sm6G5alp8 <br>
 **Pledge Algorithm**<br>
 https://wiki.thymio.org/en:avoiding-an-obstacle-using-the-pledge-algorithm <br>
-This algorithm can work for finding an "exit" but when the robot first enters the maze through an opening it might detect the entrance as an exit.
+This algorithm can work for finding an "exit" but when the robot first enters the maze through an opening it might detect the entrance as an exit. <br>
 **Depth-First Maze Solver** <br>
 https://www.youtube.com/watch?v=zalhUp4ms6c
 
