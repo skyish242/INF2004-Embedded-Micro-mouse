@@ -20,14 +20,12 @@ a _PID controller_ enhances the car's control system, ensuring smooth and accura
 
 ## Features
 
-List the key features or functionalities of your project. You can use bullet points or a table for this.
-
-- Interactive UI
-- Objection Detection and Avoidance 
-- Line Tracking with Infrared Sensor
-- Barcode Reading with Infrared Sensor
-- PID Controller for navigation
-- Maze Mapping Algorithm 
+- **Interactive UI**
+- **Objection Detection and Avoidance** 
+- **Line Tracking with Infrared Sensor**
+- **Barcode Reading with Infrared Sensor**
+- **PID Controller for Navigation**
+- **Maze Mapping Algorithm**
 
 ## Getting Started
 
