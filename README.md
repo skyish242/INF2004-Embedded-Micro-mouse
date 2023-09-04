@@ -49,12 +49,12 @@ Hello World
 
 ## Additional Resources
 
-<u>**General**</u><br>
-<u>**IR Sensor**</u><br>
-<u>**Ultrasonic Sensor**</u><br>
-<u>**Barcode Reading**</u><br>
-<u>**PID Controller for Navigation**</u><br>
-<u>**Mapping Algorithm**</u><br>
+**General**<br>
+**IR Sensor**<br>
+**Ultrasonic Sensor**<br>
+**Barcode Reading**<br>
+**PID Controller for Navigation**<br>
+**Mapping Algorithm**<br>
 
 ## Acknowledgments
 
