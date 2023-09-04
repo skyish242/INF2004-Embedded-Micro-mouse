@@ -11,7 +11,7 @@ a _PID controller_ enhances the car's control system, ensuring smooth and accura
   - [Prerequisites](#prerequisites)
   - [Installation](#installation)
 - [Usage](#usage)
-- [Additional Resources](#resources)
+- [Additional Resources](#additional-resources)
 - [Acknowledgments](#acknowledgments)
 
 ## Team Members
@@ -44,6 +44,8 @@ Woof Woof Woof Woof
 Woof Woof Woof Woof 
 
 ## Usage
+
+Hello World
 
 ## Additional Resources
 
