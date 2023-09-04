@@ -16,16 +16,20 @@ a _PID controller_ enhances the car's control system, ensuring smooth and accura
 
 ## Team Members
 
-
-
+- Ong Si Hui (2201945)
+- Pang Zi Jian, Adrian (2200692)
+- Nur Hakeem Bin Azman (2201052)
+- Joshua Lim ()
+- Shaun Tay ()
+  
 ## Features
 
-- **Interactive UI**
-- **Objection Detection and Avoidance** 
-- **Line Tracking with Infrared Sensor**
-- **Barcode Reading with Infrared Sensor**
-- **PID Controller for Navigation**
-- **Maze Mapping Algorithm**
+<u>**Interactive UI**</u>
+<u>**Objection Detection and Avoidance**</u>
+<u>**Line Tracking with Infrared Sensor**</u>
+<u>**Barcode Reading with Infrared Sensor**</u>
+<u>**PID Controller for Navigation**</u>
+<u>**Maze Mapping Algorithm**</u>
 
 ## Getting Started
 
@@ -43,4 +47,13 @@ Woof Woof Woof Woof
 
 ## Additional Resources
 
+<u>**General**</u>
+<u>**IR Sensor**</u>
+<u>**Ultrasonic Sensor**</u>
+<u>**Barcode Reading**</u>
+<u>**PID Controller for Navigation**</u>
+<u>**Mapping Algorithm**</u>
+
 ## Acknowledgments
+
+ChatAi revolutionize my life
