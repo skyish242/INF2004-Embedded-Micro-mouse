@@ -73,20 +73,21 @@ Hello World
 <summary>Mapping Algorithm</summary>
   
 ### Pledge Algorithm
+*****
 This algorithm can work for finding an "exit" but when the robot first enters the maze through an opening it might detect the entrance as an exit.
 https://wiki.thymio.org/en:avoiding-an-obstacle-using-the-pledge-algorithm
 
 ### Flood Fill Algorithm
-
+*****
 **Theory**
+*****
 __From end goal to start__
 https://www.youtube.com/watch?v=Zwh-QNlsurI
 
 [https://www.youtube.com/watch?v=GoJ-K7gniFI&t=244s](https://www.youtube.com/watch?v=ktn3C7aXVR0&t=172s&pp=ygUVZmxvb2QgZmlsbCBhbGdvcnRpaG0g)
-*****
 
 ### Depth-First Maze Solver
-
+*****
 https://www.youtube.com/watch?v=zalhUp4ms6c
 
 </details>
