@@ -49,34 +49,44 @@ Hello World
 
 ## Additional Resources
 
-**General**<br>
-**IR Sensor**<br>
-**Ultrasonic Sensor**<br>
-**Barcode Reading**<br>
-**PID Controller for Navigation**<br>
-**Mapping Algorithm**<br>
-**Line Tracking**<br>
-https://www.youtube.com/watch?v=z9sm6G5alp8 <br>
-**Pledge Algorithm**<br>
-https://wiki.thymio.org/en:avoiding-an-obstacle-using-the-pledge-algorithm <br>
-This algorithm can work for finding an "exit" but when the robot first enters the maze through an opening it might detect the entrance as an exit. <br>
-**Depth-First Maze Solver** <br>
-https://www.youtube.com/watch?v=zalhUp4ms6c
+<details>
+<summary>**General**</summary>
+</details>
 
 <details>
-
-<summary>**General**</summary>
 <summary>**IR Sensor**</summary>
+</details>
+
+<details>
 <summary>**Ultrasonic Sensor**</summary>
+</details>
+
+<details>
 <summary>**Barcode Reading**</summary>
+</details>
+
+<details>
 <summary>**PID Controller for Navigation**</summary>
+</details>
+
+<details>
 <summary>**Mapping Algorithm**</summary>
-<summary>**Line Tracking**</summary>
+  
+### Flood Fill Algorithm
+This algorithm can work for finding an "exit" but when the robot first enters the maze through an opening it might detect the entrance as an exit.
+https://wiki.thymio.org/en:avoiding-an-obstacle-using-the-pledge-algorithm
+
+### Flood Fill Algorithm
+
+### Depth-First Maze Solver
+https://www.youtube.com/watch?v=zalhUp4ms6c
 
 </details>
 
 <details>
-<summary>**General**</summary>
+<summary>**Line Tracking**</summary>
+
+https://www.youtube.com/watch?v=z9sm6G5alp8
 
 </details>
 
