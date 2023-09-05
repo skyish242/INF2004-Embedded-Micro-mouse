@@ -63,6 +63,23 @@ This algorithm can work for finding an "exit" but when the robot first enters th
 **Depth-First Maze Solver** <br>
 https://www.youtube.com/watch?v=zalhUp4ms6c
 
+<details>
+
+<summary>**General**</summary>
+<summary>**IR Sensor**</summary>
+<summary>**Ultrasonic Sensor**</summary>
+<summary>**Barcode Reading**</summary>
+<summary>**PID Controller for Navigation**</summary>
+<summary>**Mapping Algorithm**</summary>
+<summary>**Line Tracking**</summary>
+
+</details>
+
+<details>
+<summary>**General**</summary>
+
+</details>
+
 ## Acknowledgments
 
 ChatAi revolutionize my life
