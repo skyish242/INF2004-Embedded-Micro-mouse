@@ -85,7 +85,7 @@ https://www.youtube.com/watch?v=zalhUp4ms6c
 
 <details>
 <summary>Line Tracking</summary>
-[![Watch the video](https://img.youtube.com/vi/nTQUwghvy5Q/default.jpg)](https://www.youtube.com/watch?v=z9sm6G5alp8)
+  https://www.youtube.com/watch?v=z9sm6G5alp8
 
 
 </details>
