@@ -50,19 +50,19 @@ Hello World
 ## Additional Resources
 
 <details>
-<summary>**General**</summary>
+<summary>General</summary>
 </details>
 
 <details>
-<summary>**IR Sensor**</summary>
+<summary>IR Sensor</summary>
 </details>
 
 <details>
-<summary>**Ultrasonic Sensor**</summary>
+<summary>Ultrasonic Sensor</summary>
 </details>
 
 <details>
-<summary>**Barcode Reading**</summary>
+<summary>Barcode Reading</summary>
 </details>
 
 <details>
@@ -70,9 +70,9 @@ Hello World
 </details>
 
 <details>
-<summary>**Mapping Algorithm**</summary>
+<summary>Mapping Algorithm</summary>
   
-### Flood Fill Algorithm
+### Pledge Algorithm
 This algorithm can work for finding an "exit" but when the robot first enters the maze through an opening it might detect the entrance as an exit.
 https://wiki.thymio.org/en:avoiding-an-obstacle-using-the-pledge-algorithm
 
@@ -84,9 +84,9 @@ https://www.youtube.com/watch?v=zalhUp4ms6c
 </details>
 
 <details>
-<summary>**Line Tracking**</summary>
+<summary>Line Tracking</summary>
+[![Watch the video](https://img.youtube.com/vi/nTQUwghvy5Q/default.jpg)](https://www.youtube.com/watch?v=z9sm6G5alp8)
 
-https://www.youtube.com/watch?v=z9sm6G5alp8
 
 </details>
 
