@@ -9,4 +9,4 @@ pico_enable_stdio_usb(irline 1)
 pico_add_extra_outputs(irline)
 
 # add url via pico_set_program_url
-example_auto_set_url(irline)
+#example_auto_set_url(irline)

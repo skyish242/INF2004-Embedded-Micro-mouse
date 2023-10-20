@@ -9,4 +9,4 @@ pico_enable_stdio_usb(ultrasonic 1)
 pico_add_extra_outputs(ultrasonic)
 
 # add url via pico_set_program_url
-example_auto_set_url(ultrasonic)
+#example_auto_set_url(ultrasonic)
