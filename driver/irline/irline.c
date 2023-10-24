@@ -3,33 +3,63 @@
 #include "hardware/gpio.h"
 #include "hardware/adc.h"
 
-#define LINE_THRESHOLD 1000
-#define BUFFER_SIZE 9
+#define LINE_THRESHOLD 1500
+#define BUFFER_SIZE 10
 
-uint32_t elapsed_times[BUFFER_SIZE];
-int index = 0;
+uint32_t line_timings[BUFFER_SIZE];
+uint32_t elapsed_times[BUFFER_SIZE - 1];
+int timer_index = 0;
 
-void timer_callback(struct repeating_timer *t){
-    static uint32_t start_time = 0;
+bool timer_callback(struct repeating_timer *t){
+    static bool color_changed = true;
 
     uint16_t adc_value = adc_read();
-    printf("%d\n", adc_value);
 
     if (adc_value >= LINE_THRESHOLD){
-        printf("Line detected\n");
-        if (start_time == 0) {
-            start_time = time_us_32();
+        if (color_changed){
+            color_changed = false;
+            // line_timings[timer_index] = to_us_since_boot(get_absolute_time());
+            line_timings[timer_index] = time_us_64();
+            timer_index++;
         }
     }
     else{
-        if (start_time != 0){
-            elapsed_times[index] = time_us_32() - start_time;
-            start_time = 0;
-            index++;
+        if (!color_changed){
+            color_changed = true;
+            line_timings[timer_index] = time_us_64();
+            timer_index++;
             
-            if (index >= BUFFER_SIZE) {
-                cancel_repeating_timer(t);
-            }
+        }
+    }
+    // if (timer_index >= BUFFER_SIZE) {
+        // cancel_repeating_timer(t);
+    // }
+    return true;
+}
+
+void getElapsedTimes(uint32_t arr[]){
+    for (int i = 0; i < BUFFER_SIZE - 1; i++){
+        elapsed_times[i] = arr[i+1] - arr[i];
+    }
+}
+
+void findTopThree(uint32_t arr[], int *max1, int *max2, int *max3){
+    *max1 = 0;
+    *max2 = 0;
+    *max3 = 0;
+
+    for(int i = 0; i < BUFFER_SIZE; i++){
+        if (arr[i] > *max1){
+          *max3 = *max2;
+          *max2 = *max1;
+          *max1 = arr[i];
+        }
+        else if (arr[i] > *max2){
+           *max3 = *max2;
+           *max2 = arr[i];
+        }
+        else if (arr[i] > *max3){
+           *max3 = arr[i];
         }
     }
 }
@@ -38,16 +68,24 @@ int main(void) {
     stdio_init_all();
     adc_init();
     adc_gpio_init(26);
+    int max1, max2, max3;
 
     struct repeating_timer timer;
 
     add_repeating_timer_ms(100, timer_callback, NULL, &timer);
 
-    while (index < BUFFER_SIZE) {
+    while (timer_index < BUFFER_SIZE) {
     }
 
-    for (int i = 0; i < BUFFER_SIZE; i++) {
-      printf("Elapsed Time %d: %u us\n", i, elapsed_times[i]);
+    getElapsedTimes(line_timings);
+    findTopThree(elapsed_times, &max1, &max2, &max3);
+
+    printf("%d\n", max1);
+    printf("%d\n", max2);
+    printf("%d\n", max3);
+
+    for (int i = 0; i < BUFFER_SIZE - 1; i++) {
+        printf("Elapsed Time %d: %lu us\n", i, elapsed_times[i]);
     }
 
     return 0;
