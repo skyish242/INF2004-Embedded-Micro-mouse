@@ -220,10 +220,10 @@ int32_t get_angle(mag_t *mag) {
    // Convert radian to degree
    double angle_deg = (angle_rad * (180.0 / M_PI)) + 180;
 
-   // if (angle_deg < 0) 
-   // {
-   //    angle_deg += 360;
-   // }
+   if (angle_deg < 0) 
+   {
+        angle_deg += 360;
+   }
 
    return (int32_t) angle_deg;
 }
