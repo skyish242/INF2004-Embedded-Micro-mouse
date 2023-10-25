@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html>
+    <head> 
+        <title>PicoW Web Server</title> 
+        <script src="meow.js"></script>
+        <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+        <style>
+            /* Define your CSS styles for the canvas */
+            canvas {
+                border: 2px solid black;
+                background-color: slategray;
+                margin-left: 26%;
+            }
+            .title{
+                text-align: center;
+            }
+            .outer-div{
+                width: 70%;
+                margin: auto;
+                padding:5px;
+            }
+            .led_controller, .car_controller{
+                text-align: center;
+            }
+        </style>
+    </head>
+    <body> <h1 class="title">Meow Meow Map</h1>
+        <p class="map-data" style="display: none;">Map1:<!--#map1--></p>
+        <p class="map-data" style="display: none;">Map2:<!--#map2--></p>
+        <p class="map-data" style="display: none;">Map3:<!--#map3--></p>
+        <p class="map-data" style="display: none;">Map4:<!--#map4--></p>
+        <div class="outer-div">
+          
+            <canvas id="myCanvas" width="500" height="500"></canvas>
+            <br>
+            <div class="car_controller">
+            <h2>Robot Car Controller:</h2>
+            <a href="/car_movement.cgi?move=left"><button>Move Left</button></a>
+            <a href="/car_movement.cgi?move=right"><button>Move Right</button></a>
+            <a href="/car_movement.cgi?move=forward"><button>Move Forward</button></a>
+            <a href="/car_movement.cgi?move=backward"><button>Move Backward</button></a>
+            </div>
+            <br>
+            <div class="led_controller">
+            <h2>LED Controller:</h2>
+            <p>LED is: <!--#led--></p>
+            <a href="/led.cgi?led=1"><button>LED ON</button></a>
+            <a href="/led.cgi?led=0"><button>LED OFF</button></a>
+            </div>
+            <br>
+            <br>
+            <a href="/index.shtml">Refresh</a>  
+        </div> 
+   </body>
+</html>

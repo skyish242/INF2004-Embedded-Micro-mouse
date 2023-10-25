@@ -1,6 +1,11 @@
 add_executable(motor
         motor.c
-        )
+)
+
+target_include_directories(motor PRIVATE
+    ${CMAKE_CURRENT_LIST_DIR}
+    ${CMAKE_SOURCE_DIR}/driver/web_server # Include the motor directory
+)
 
 target_link_libraries(motor pico_stdlib hardware_adc hardware_pwm)
 
@@ -9,4 +14,6 @@ pico_enable_stdio_usb(motor 1)
 pico_add_extra_outputs(motor)
 
 # add url via pico_set_program_url
-#example_auto_set_url(motor)
+example_auto_set_url(motor)
+
+
