@@ -1,12 +1,3 @@
-/*
- * File name: combined.c
- * Date:      2022/06/30
- * Author:    Tomas Dudacek
- * 
- * License:   MIT License
- * Copyright (c) 2022 Tomas Dudacek
- */
-
 #include <stdio.h>
 #include <math.h>
 #include <stdint.h>
@@ -72,7 +63,7 @@ int main() {
    while (true) {
       lsm303dlh_read_mag(&mag);
       int32_t angle = get_angle(&mag);
-      printf("Magnetometer angle = %d degrees\n", angle);
+      printf("X = %d, Y = %d, Z = %d, Angle = %d degrees\n", mag.x, mag.y, mag.z, angle);
       sleep_ms(REFRESH_PERIOD);
    }
 
@@ -222,7 +213,7 @@ int32_t get_angle(mag_t *mag) {
 
    if (angle_deg < 0) 
    {
-        angle_deg += 360;
+      angle_deg += 360;
    }
 
    return (int32_t) angle_deg;
