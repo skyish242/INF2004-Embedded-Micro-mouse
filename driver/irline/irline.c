@@ -188,7 +188,7 @@ bool timer_callback(struct repeating_timer *t) {
         // Check if it's the starting or ending asterisk
         if (charBarcode == '*' || reversedCharBarcode == '*') {
             if (barcodeReading[0] == '*') {
-                barcodeReading[2] = '*';
+                printf("%c\n", barcodeReading[1]);
             }
             else {
                 barcodeReading[0] = '*';
@@ -197,8 +197,12 @@ bool timer_callback(struct repeating_timer *t) {
 
         // It's a valid character
         else {
+            // This means that after scanning a character, another character was scanned, thus invalid barcode
+            if (barcodeReading[1] != '\0') {
+                cancel_repeating_timer(t);
+            }
             // Check if it's the forward or reversed reading
-            if (charBarcode != '?') {
+            else if (charBarcode != '?') {
                 barcodeReading[1] = charBarcode;
             }
             else {
@@ -209,12 +213,6 @@ bool timer_callback(struct repeating_timer *t) {
         for (int i = 0; i < BUFFER_SIZE - 1; i++) {
             printf("%d ", binBarcode[i]);
             // printf("Elapsed Time %d: %lu us\n", i, elapsed_times[i]);
-        }
-        if (validBarcode){
-            printf("%c", charBarcode);
-        }
-        if (reverseBarcode){
-            printf("%c", reversedCharBarcode);
         }
         printf("\nEnd of one char \n");
         timer_index = 0;
