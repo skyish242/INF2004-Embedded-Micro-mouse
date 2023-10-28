@@ -6,12 +6,12 @@
 
 uint32_t line_timings[BUFFER_SIZE];
 uint32_t elapsed_times[BUFFER_SIZE - 1];
-int binBarcode[BUFFER_SIZE - 1];
+char barcodeReading[3];
 int timer_index = 0;
 
 // This is the function to get the time differences between the time taken from each color change in the timer interrupt
 // 
-void getElapsedTimes(uint32_t arr[]){
+void getElapsedTimes(uint32_t arr[]) {
     for (int i = 0; i < BUFFER_SIZE - 1; i++){
         elapsed_times[i] = arr[i+1] - arr[i];
     }
@@ -19,7 +19,7 @@ void getElapsedTimes(uint32_t arr[]){
 
 // As code39 barcodes only have 3 wide bars, just have to find the top 3 timings, this function finds the top three timings from a given array
 //
-void findTopThree(uint32_t arr[], int *max1, int *max2, int *max3){
+void findTopThree(uint32_t arr[], int *max1, int *max2, int *max3) {
     *max1 = 0;
     *max2 = 0;
     *max3 = 0;
@@ -42,7 +42,7 @@ void findTopThree(uint32_t arr[], int *max1, int *max2, int *max3){
 
 // After getting the pulse widths of the barcode, we will then need to convert this into a simpler to read binary format, 1 for wide bars and 0 for small bars
 //
-void convertTimingToBin(uint32_t arr[], int max1, int max2, int max3, int binBarcode[]){
+void convertTimingToBin(uint32_t arr[], int max1, int max2, int max3, int binBarcode[]) {
     for (int i = 0; i < BUFFER_SIZE; i++){
         if(arr[i] == max1 || arr[i] == max2 || arr[i] == max3){
             binBarcode[i] = 1;
@@ -55,7 +55,7 @@ void convertTimingToBin(uint32_t arr[], int max1, int max2, int max3, int binBar
 
 // This function contains all the characters in the code39 bacode and decodes the barcode based on the binary barcode given
 //
-char decodeCode39(int binaryArray[9]){
+char decodeCode39(int binaryArray[9]) {
     Code39Mapping code39Mappings[] = {
         {{0, 1, 0, 0, 1, 0, 1, 0, 0}, '*'},
         {{1, 0, 0, 0, 0, 1, 0, 0, 1}, 'A'},
@@ -122,9 +122,21 @@ char decodeCode39(int binaryArray[9]){
     return '?';
 }
 
+// Reverses the binary array based on the 2 arrays given
+void reverseBinaryArray(int binaryArray[9], int reversedArray[9]) {
+    int start = 0;
+    int end = 8;
+    
+    while (start < end) {
+        reversedArray[start] = binaryArray[end];
+        start++;
+        end--;
+    }
+}
+
 // This is a timer interrupt that is triggered to check the current line value for the barcode
 // 
-bool timer_callback(struct repeating_timer *t){
+bool timer_callback(struct repeating_timer *t) {
     static bool color_changed = true; // This is a flag to check whether the color has been changed or not
 
     // Selecting the IR sensor based on the ADC graph
@@ -152,17 +164,58 @@ bool timer_callback(struct repeating_timer *t){
 
     // One 9 element character has been read and can be now decoded and returned
     if (timer_index >= BUFFER_SIZE) {
+        bool validBarcode = false;
+        bool reverseBarcode = false;
         int max1, max2, max3;
-        getElapsedTimes(line_timings);
-        findTopThree(elapsed_times, &max1, &max2, &max3);
-        convertTimingToBin(elapsed_times, max1, max2, max3, binBarcode);
-        char charBarcode = decodeCode39(binBarcode);
+        int binBarcode[BUFFER_SIZE - 1];
+        int reversedBinBarcode[BUFFER_SIZE - 1];
+        getElapsedTimes(line_timings); // Get timing differences between each color change in the barcode
+
+        findTopThree(elapsed_times, &max1, &max2, &max3); // Find the three wide barcodes
+
+        convertTimingToBin(elapsed_times, max1, max2, max3, binBarcode); // Convert the timings into binary format for easier viewing
+
+        char charBarcode = decodeCode39(binBarcode); // decode the barcode into a character based on the Code 39 standard
+
+        reverseBinaryArray(binBarcode, reversedBinBarcode); // Reverse the barcode so that able to read barcode backwards as well
+        char reversedCharBarcode = decodeCode39(reversedBinBarcode); // decode the barcode into a character based on the Code 39 standard
+
+        // Cancel the barcode reading if cannot read the barcode
+        if (charBarcode == '?' && reversedCharBarcode == '?') {
+            cancel_repeating_timer(t);
+        }
+
+        // Check if it's the starting or ending asterisk
+        if (charBarcode == '*' || reversedCharBarcode == '*') {
+            if (barcodeReading[0] == '*') {
+                barcodeReading[2] = '*';
+            }
+            else {
+                barcodeReading[0] = '*';
+            }
+        }
+
+        // It's a valid character
+        else {
+            // Check if it's the forward or reversed reading
+            if (charBarcode != '?') {
+                barcodeReading[1] = charBarcode;
+            }
+            else {
+                barcodeReading[1] = reversedCharBarcode;
+            }
+        }
 
         for (int i = 0; i < BUFFER_SIZE - 1; i++) {
             printf("%d ", binBarcode[i]);
             // printf("Elapsed Time %d: %lu us\n", i, elapsed_times[i]);
         }
-        printf("%c", charBarcode);
+        if (validBarcode){
+            printf("%c", charBarcode);
+        }
+        if (reverseBarcode){
+            printf("%c", reversedCharBarcode);
+        }
         printf("\nEnd of one char \n");
         timer_index = 0;
         color_changed = false;
