@@ -1,28 +1,24 @@
-#include <stdio.h>
-#include "pico/stdlib.h"
-#include "hardware/gpio.h"
-#include "hardware/adc.h"
-
-#define LINE_THRESHOLD 1500
-#define BUFFER_SIZE 10
+// #include <stdio.h>
+// #include "pico/stdlib.h"
+// #include "hardware/gpio.h"
+// #include "hardware/adc.h"
+#include "irline.h"
 
 uint32_t line_timings[BUFFER_SIZE];
-int binBarcode[BUFFER_SIZE - 1];
 uint32_t elapsed_times[BUFFER_SIZE - 1];
+int binBarcode[BUFFER_SIZE - 1];
 int timer_index = 0;
 
-typedef struct {
-    int binary[9];
-    char character;
-} Code39Mapping;
-
-
+// This is the function to get the time differences between the time taken from each color change in the timer interrupt
+// 
 void getElapsedTimes(uint32_t arr[]){
     for (int i = 0; i < BUFFER_SIZE - 1; i++){
         elapsed_times[i] = arr[i+1] - arr[i];
     }
 }
 
+// As code39 barcodes only have 3 wide bars, just have to find the top 3 timings, this function finds the top three timings from a given array
+//
 void findTopThree(uint32_t arr[], int *max1, int *max2, int *max3){
     *max1 = 0;
     *max2 = 0;
@@ -44,6 +40,8 @@ void findTopThree(uint32_t arr[], int *max1, int *max2, int *max3){
     }
 }
 
+// After getting the pulse widths of the barcode, we will then need to convert this into a simpler to read binary format, 1 for wide bars and 0 for small bars
+//
 void convertTimingToBin(uint32_t arr[], int max1, int max2, int max3, int binBarcode[]){
     for (int i = 0; i < BUFFER_SIZE; i++){
         if(arr[i] == max1 || arr[i] == max2 || arr[i] == max3){
@@ -55,7 +53,9 @@ void convertTimingToBin(uint32_t arr[], int max1, int max2, int max3, int binBar
     }
 }
 
-char decodeCode39(int binaryArray[9]) {
+// This function contains all the characters in the code39 bacode and decodes the barcode based on the binary barcode given
+//
+char decodeCode39(int binaryArray[9]){
     Code39Mapping code39Mappings[] = {
         {{0, 1, 0, 0, 1, 0, 1, 0, 0}, '*'},
         {{1, 0, 0, 0, 0, 1, 0, 0, 1}, 'A'},
@@ -122,19 +122,25 @@ char decodeCode39(int binaryArray[9]) {
     return '?';
 }
 
+// This is a timer interrupt that is triggered to check the current line value for the barcode
+// 
 bool timer_callback(struct repeating_timer *t){
-    static bool color_changed = true;
+    static bool color_changed = true; // This is a flag to check whether the color has been changed or not
 
+    // Selecting the IR sensor based on the ADC graph
+    adc_select_input(0);
+    // Reads the current value from the IR sensor
     uint16_t adc_value = adc_read();
 
+    // Checks if the line is black, means there is a barcode
     if (adc_value >= LINE_THRESHOLD){
         if (color_changed){
             color_changed = false;
-            // line_timings[timer_index] = to_us_since_boot(get_absolute_time());
             line_timings[timer_index] = time_us_64();
             timer_index++;
         }
     }
+
     else{
         if (!color_changed){
             color_changed = true;
@@ -143,13 +149,14 @@ bool timer_callback(struct repeating_timer *t){
             
         }
     }
+
+    // One 9 element character has been read and can be now decoded and returned
     if (timer_index >= BUFFER_SIZE) {
         int max1, max2, max3;
         getElapsedTimes(line_timings);
         findTopThree(elapsed_times, &max1, &max2, &max3);
         convertTimingToBin(elapsed_times, max1, max2, max3, binBarcode);
         char charBarcode = decodeCode39(binBarcode);
-
 
         for (int i = 0; i < BUFFER_SIZE - 1; i++) {
             printf("%d ", binBarcode[i]);
@@ -173,10 +180,8 @@ int main(void) {
 
     add_repeating_timer_ms(100, timer_callback, NULL, &timer);
 
-    // while (timer_index < BUFFER_SIZE) {
     while (true) {
     }
-
 
     return 0;
 }
