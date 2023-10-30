@@ -241,6 +241,12 @@ bool timer_callback(struct repeating_timer *t) {
     return true;
 }
 
+void detectLine(){
+    adc_select_input(0);
+    uint16_t adc_value = adc_read();
+    printf("%d", adc_value);
+}
+
 int main(void) {
     stdio_init_all();
     adc_init();

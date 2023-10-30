@@ -20,3 +20,5 @@ char decodeCode39(int binaryArray[9]);
 void reverseBinaryArray(int binaryArray[9], int reversedArray[9]);
 
 bool timer_callback(struct repeating_timer *t);
+
+void detectLine();
