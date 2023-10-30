@@ -4,16 +4,24 @@
 // #include "hardware/adc.h"
 #include "irline.h"
 
-uint32_t line_timings[BUFFER_SIZE];
-uint32_t elapsed_times[BUFFER_SIZE - 1];
+uint32_t lineTimings[BUFFER_SIZE];
+uint32_t elapsedTimes[BUFFER_SIZE - 1];
 char barcodeReading[3];
 int timer_index = 0;
+
+float adc_rolling_avg;
+float adc_rolling_sum = 0;
+
+// Rolling window to average the current adc reading
+static float data[10] = {};
+static int rolling_index = 0;
+static int rolling_count = 0;
 
 // This is the function to get the time differences between the time taken from each color change in the timer interrupt
 // 
 void getElapsedTimes(uint32_t arr[]) {
     for (int i = 0; i < BUFFER_SIZE - 1; i++){
-        elapsed_times[i] = arr[i+1] - arr[i];
+        elapsedTimes[i] = arr[i+1] - arr[i];
     }
 }
 
@@ -144,11 +152,22 @@ bool timer_callback(struct repeating_timer *t) {
     // Reads the current value from the IR sensor
     uint16_t adc_value = adc_read();
 
+    adc_rolling_sum -= data[rolling_index];
+    data[rolling_index] = adc_value;
+    adc_rolling_sum += data[rolling_index];
+    rolling_index = (rolling_index + 1) % 10;
+
+    if (rolling_count < 10) {
+        rolling_count++;
+    }
+
+    adc_rolling_avg = adc_rolling_sum / rolling_count;
+
     // Checks if the line is black, means there is a barcode
-    if (adc_value >= LINE_THRESHOLD){
+    if (adc_rolling_avg >= LINE_THRESHOLD){
         if (color_changed){
             color_changed = false;
-            line_timings[timer_index] = time_us_64();
+            lineTimings[timer_index] = time_us_64();
             timer_index++;
         }
     }
@@ -156,67 +175,67 @@ bool timer_callback(struct repeating_timer *t) {
     else{
         if (!color_changed){
             color_changed = true;
-            line_timings[timer_index] = time_us_64();
+            lineTimings[timer_index] = time_us_64();
             timer_index++;
-            
         }
     }
 
     // One 9 element character has been read and can be now decoded and returned
     if (timer_index >= BUFFER_SIZE) {
-        bool validBarcode = false;
-        bool reverseBarcode = false;
         int max1, max2, max3;
         int binBarcode[BUFFER_SIZE - 1];
         int reversedBinBarcode[BUFFER_SIZE - 1];
-        getElapsedTimes(line_timings); // Get timing differences between each color change in the barcode
+        getElapsedTimes(lineTimings); // Get timing differences between each color change in the barcode
 
-        findTopThree(elapsed_times, &max1, &max2, &max3); // Find the three wide barcodes
+        findTopThree(elapsedTimes, &max1, &max2, &max3); // Find the three wide barcodes
 
-        convertTimingToBin(elapsed_times, max1, max2, max3, binBarcode); // Convert the timings into binary format for easier viewing
+        convertTimingToBin(elapsedTimes, max1, max2, max3, binBarcode); // Convert the timings into binary format for easier viewing
 
         char charBarcode = decodeCode39(binBarcode); // decode the barcode into a character based on the Code 39 standard
 
         reverseBinaryArray(binBarcode, reversedBinBarcode); // Reverse the barcode so that able to read barcode backwards as well
         char reversedCharBarcode = decodeCode39(reversedBinBarcode); // decode the barcode into a character based on the Code 39 standard
 
-        // Cancel the barcode reading if cannot read the barcode
-        if (charBarcode == '?' && reversedCharBarcode == '?') {
-            cancel_repeating_timer(t);
-        }
+        // // Cancel the barcode reading if cannot read the barcode
+        // if (charBarcode == '?' && reversedCharBarcode == '?') {
+        //     // cancel_repeating_timer(t);
+        //     printf("Invalid char");
+        // }
 
-        // Check if it's the starting or ending asterisk
-        if (charBarcode == '*' || reversedCharBarcode == '*') {
-            if (barcodeReading[0] == '*') {
-                printf("%c\n", barcodeReading[1]);
-            }
-            else {
-                barcodeReading[0] = '*';
-            }
-        }
+        // // Check if it's the starting or ending asterisk
+        // if (charBarcode == '*' || reversedCharBarcode == '*') {
+        //     if (barcodeReading[0] == '*') {
+        //         printf("%c\n", barcodeReading[1]);
+        //     }
+        //     else {
+        //         printf("Asterisk detected");
+        //         barcodeReading[0] = '*';
+        //     }
+        // }
 
-        // It's a valid character
-        else {
-            // This means that after scanning a character, another character was scanned, thus invalid barcode
-            if (barcodeReading[1] != '\0') {
-                cancel_repeating_timer(t);
-            }
-            // Check if it's the forward or reversed reading
-            else if (charBarcode != '?') {
-                barcodeReading[1] = charBarcode;
-            }
-            else {
-                barcodeReading[1] = reversedCharBarcode;
-            }
-        }
+        // // It's a valid character
+        // else {
+        //     // This means that after scanning a character, another character was scanned, thus invalid barcode
+        //     if (barcodeReading[1] != '\0') {
+        //         cancel_repeating_timer(t);
+        //     }
+        //     // Check if it's the forward or reversed reading
+        //     else if (charBarcode != '?') {
+        //         barcodeReading[1] = charBarcode;
+        //     }
+        //     else {
+        //         barcodeReading[1] = reversedCharBarcode;
+        //     }
+        // }
 
         for (int i = 0; i < BUFFER_SIZE - 1; i++) {
             printf("%d ", binBarcode[i]);
             // printf("Elapsed Time %d: %lu us\n", i, elapsed_times[i]);
         }
-        printf("\nEnd of one char \n");
+        printf("\n%c\n", charBarcode);
+        printf("End of one char\n");
         timer_index = 0;
-        color_changed = false;
+        color_changed = true;
         // cancel_repeating_timer(t);
     }
     return true;
@@ -229,7 +248,7 @@ int main(void) {
 
     struct repeating_timer timer;
 
-    add_repeating_timer_ms(100, timer_callback, NULL, &timer);
+    add_repeating_timer_ms(50, timer_callback, NULL, &timer);
 
     while (true) {
     }
