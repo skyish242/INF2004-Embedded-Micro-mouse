@@ -113,12 +113,12 @@ void moveForward() {
 void moveLeft() {
 
     // Motor A
-    gpio_put(IN1, 0);
-    gpio_put(IN2, 1);
+    gpio_put(IN1, 1);
+    gpio_put(IN2, 0);
 
     // Motor B
-    gpio_put(IN3, 1);
-    gpio_put(IN4, 0);
+    gpio_put(IN3, 0);
+    gpio_put(IN4, 1);
 
     // Set duty cycle of PWM signal on channel A of the specified PWM slice to 50%
     setMotorLeft(DUTY_CYCLE);
@@ -131,12 +131,12 @@ void moveLeft() {
 // Move right
 void moveRight() {
     // Motor A
-    gpio_put(IN1, 1);
-    gpio_put(IN2, 0);
+    gpio_put(IN1, 0);
+    gpio_put(IN2, 1);
 
     // Motor B
-    gpio_put(IN3, 0);
-    gpio_put(IN4, 1);
+    gpio_put(IN3, 1);
+    gpio_put(IN4, 0);
 
     // Set duty cycle of PWM signal on channel A of the specified PWM slice to 50%
     setMotorLeft(DUTY_CYCLE);
@@ -162,25 +162,25 @@ void stopMotors(){
     setMotorRight(0);
 }
 
-int main() {
+// int main() {
 
-    // Initialisation
-    stdio_init_all();
-    motorInit();
+//     // Initialisation
+//     stdio_init_all();
+//     motorInit();
 
-    setupPWM(LEFT_MOTOR_PWM);
-    setupPWM(RIGHT_MOTOR_PWM);
+//     setupPWM(LEFT_MOTOR_PWM);
+//     setupPWM(RIGHT_MOTOR_PWM);
 
-    while (1) {
-        moveForward();
-        sleep_ms(5000);
-        moveLeft();
-        sleep_ms(5000);
-        moveBackward();
-        sleep_ms(5000);
-        moveRight();
-        sleep_ms(5000);
+//     while (1) {
+//         moveForward();
+//         sleep_ms(5000);
+//         moveLeft();
+//         sleep_ms(5000);
+//         moveBackward();
+//         sleep_ms(5000);
+//         moveRight();
+//         sleep_ms(5000);
         
-    }
+//     }
 
-}
+// }
