@@ -6,6 +6,7 @@
 
 #include "pico/stdlib.h"
 #include "hardware/pwm.h"
+#include "motor.h"
 
 // Define GPIO pins for motor input
 #define IN1 10  // Input 1 for Motor A
@@ -76,8 +77,8 @@ void setMotorRight (int16_t pwm_value) {
     pwm_set_chan_level(slice_num, PWM_CHAN_B, (uint16_t) pwm_value);
 }
 
-// Move forward
-void moveForward() {
+// Move backward
+void moveBackward() {
 
     // Motor A
     gpio_put(IN1, 1);
@@ -92,8 +93,8 @@ void moveForward() {
     setMotorRight(DUTY_CYCLE);
 }
 
-// Move backward 
-void moveBackward() {
+// Move forward 
+void moveForward() {
 
     // Motor A
     gpio_put(IN1, 0);
@@ -122,6 +123,9 @@ void moveLeft() {
     // Set duty cycle of PWM signal on channel A of the specified PWM slice to 50%
     setMotorLeft(DUTY_CYCLE);
     setMotorRight(DUTY_CYCLE);
+
+    sleep_ms(600);
+    moveForward();
 }
 
 // Move right
@@ -137,6 +141,9 @@ void moveRight() {
     // Set duty cycle of PWM signal on channel A of the specified PWM slice to 50%
     setMotorLeft(DUTY_CYCLE);
     setMotorRight(DUTY_CYCLE);
+
+    sleep_ms(600);
+    moveForward();
 }
 
 // Stop both motors
@@ -166,6 +173,13 @@ int main() {
 
     while (1) {
         moveForward();
+        sleep_ms(5000);
+        moveLeft();
+        sleep_ms(5000);
+        moveBackward();
+        sleep_ms(5000);
+        moveRight();
+        sleep_ms(5000);
         
     }
 

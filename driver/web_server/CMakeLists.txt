@@ -12,7 +12,7 @@ add_executable(${PROGRAM_NAME}
     sensor_data.c
 )
 
-target_include_directories(${PROGRAM_NAME} PRIVATE
+target_include_directories(${PROGRAM_NAME} PUBLIC
     ${CMAKE_CURRENT_LIST_DIR}
     ${CMAKE_SOURCE_DIR}/driver/motor # Include the motor directory
 )
