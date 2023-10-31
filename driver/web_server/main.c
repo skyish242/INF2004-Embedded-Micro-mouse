@@ -8,6 +8,7 @@
 #include "lwip/netif.h"
 
 #include "sensor_data.h"
+#include "motor.h"
 
 // WIFI Credentials - take care if pushing to github!
 const char WIFI_SSID[] = "skyish";
