@@ -4,6 +4,7 @@
 #include "pico/cyw43_arch.h"
 
 #include "sensor_data.h"
+#include "motor.h"
 
 char* map_stringfy(int map[16][16]){
     // Create a buffer to hold the JSON string
@@ -90,12 +91,16 @@ const char * cgi_car_movement_handler(int iIndex, int iNumParams, char *pcParam[
     // Check if the car is ordered to move (/car_movement.cgi?move=x)
     if (strcmp(pcParam[0] , "move") == 0){
         if (strcmp(pcValue[0] , "left") == 0){
+            moveLeft();
             printf("Left initiated\n");
         }else if(strcmp(pcValue[0] , "right\n") == 0){
+            moveRight();
             printf("Right initiated");
         }else if(strcmp(pcValue[0] , "forward\n") == 0){
+            moveForward();
             printf("Forward initiated");
         }else if(strcmp(pcValue[0] , "backward\n") == 0){
+            moveBackward();
             printf("Backward initiated");
         }
     }
