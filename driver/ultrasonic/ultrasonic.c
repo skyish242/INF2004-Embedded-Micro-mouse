@@ -3,8 +3,10 @@
 #include "hardware/gpio.h"
 #include "pico/time.h"
 
-const uint TRIG_PIN = 2;  // GPIO 2 for the TRIG pin
-const uint ECHO_PIN = 3;  // GPIO 3 for the ECHO pin
+#include "motor.h"
+
+const uint TRIG_PIN = 18;  // GPIO 18 for the TRIG pin
+const uint ECHO_PIN = 19;  // GPIO 19 for the ECHO pin
 
 static absolute_time_t start_time;
 static absolute_time_t end_time;
@@ -35,6 +37,9 @@ void setup() {
 
 int main() {
     setup();
+    motorInit();
+    setupPWM(0);
+    setupPWM(1);
 
     while (1) {
         gpio_put(TRIG_PIN, 1);
@@ -51,6 +56,7 @@ int main() {
         printf("Distance: %.2f cm\n", distance_cm);
 
         if (distance_cm <= 5.0) {
+            moveRight();
             printf("Warning: Object is within 5 cm!\n");
         }
 
