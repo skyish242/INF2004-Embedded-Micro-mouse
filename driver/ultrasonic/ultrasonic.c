@@ -3,8 +3,8 @@
 #include "hardware/gpio.h"
 #include "pico/time.h"
 
-const uint TRIG_PIN = 2;  // GPIO 2 for the TRIG pin
-const uint ECHO_PIN = 3;  // GPIO 3 for the ECHO pin
+const uint TRIG_PIN = 18;  // GPIO 2 for the TRIG pin
+const uint ECHO_PIN = 19;  // GPIO 3 for the ECHO pin
 
 static absolute_time_t start_time;
 static absolute_time_t end_time;
@@ -19,6 +19,19 @@ void echo_pin_handler(uint gpio, uint32_t events) {
         gpio_set_irq_enabled(ECHO_PIN, GPIO_IRQ_EDGE_RISE, true);
     }
     rising_edge = !rising_edge;
+}
+
+double kalman(double U) {
+    static const double R = 40;
+    static const double H = 1;
+    static double Q = 10;
+    static double P = 0;
+    static double U_hat = 0;
+    static double K = 0;
+    K = P * H / (H * P * H + R);
+    U_hat += K * (U - H * U_hat);
+    P = (1 - K * H) * P + Q;
+    return U_hat;
 }
 
 void setup() {
@@ -36,25 +49,35 @@ void setup() {
 int main() {
     setup();
 
+    double filtered_distance_cm = 0; // Initialize the filtered distance
     while (1) {
         gpio_put(TRIG_PIN, 1);
         sleep_us(10); // Send a 10us pulse on the TRIG pin
         gpio_put(TRIG_PIN, 0);
 
         // Wait for the measurement to complete (interrupts handle the timing)
-        sleep_ms(100); // Adjust this based on your sensor's maximum range
+        float max_distance_cm = 5;  // Maximum expected distance in centimeters
+        float speed_of_sound_cm_per_s = 34300;  // Speed of sound in centimeters per second
+
+        // Calculate the delay in milliseconds based on the maximum distance
+        int delay_ms = (2 * max_distance_cm / speed_of_sound_cm_per_s) * 1000;
+        sleep_ms(delay_ms); // Adjust this based on your sensor's maximum range
 
         // Calculate distance based on the timestamps
         int32_t duration_us = absolute_time_diff_us(start_time, end_time);
         float distance_cm = duration_us / 58.0f; // Convert to centimeters (approximate)
 
-        printf("Distance: %.2f cm\n", distance_cm);
+        // Use the Kalman filter to estimate the distance
+        filtered_distance_cm = kalman(distance_cm);
 
-        if (distance_cm <= 5.0) {
+        printf("(Distance: %.2f cm)\n",filtered_distance_cm);
+
+        if (filtered_distance_cm <= 5.0) {
             printf("Warning: Object is within 5 cm!\n");
         }
 
-        sleep_ms(500); // Delay before the next measurement
+         // Delay before the next measurement
+        sleep_ms(300);
     }
 
     return 0;
