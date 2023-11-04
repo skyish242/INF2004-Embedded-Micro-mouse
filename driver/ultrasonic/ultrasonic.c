@@ -76,8 +76,9 @@ int main() {
             printf("Warning: Object is within 5 cm!\n");
         }
 
-         // Delay before the next measurement
-        sleep_ms(300);
+        // Delay before the next measurement (10 times per second update rate)
+        sleep_ms(100);
+
     }
 
     return 0;
