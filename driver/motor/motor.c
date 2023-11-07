@@ -107,9 +107,11 @@ void moveLeft() {
     gpio_put(IN3, 0);
     gpio_put(IN4, 1);
 
+
     // Set duty cycle of PWM signal on channel A of the specified PWM slice to 50%
     setMotorLeft(DUTY_CYCLE);
     setMotorRight(DUTY_CYCLE);
+
 
     // sleep_ms(600);
     // moveForward();
@@ -149,7 +151,9 @@ void stopMotors(){
     setMotorRight(0);
 }
 
+
 void motor_init(){
+
     motorInit();
 
     setupPWM(LEFT_MOTOR_PWM);
@@ -179,3 +183,4 @@ void motor_init(){
 //     }
 
 // }
+

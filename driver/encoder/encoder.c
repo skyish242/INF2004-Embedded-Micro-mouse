@@ -7,6 +7,7 @@
 #include <stdio.h>
 #include "pico/stdlib.h"
 #include "hardware/gpio.h"
+
 #include "motor.h"
 
 // Define GP2 and GP3 for the left and right encoders
@@ -41,6 +42,7 @@ void encoder_callback(uint gpio, uint32_t events) {
 
             // Increment the notch count by 1 and calculate distance travelled
             left_notch_count++;
+
             float distance = (float)left_notch_count / ENCODER_NOTCHES * WHEEL_CIRCUMFERENCE;
 
             // Print the results
@@ -53,7 +55,9 @@ void encoder_callback(uint gpio, uint32_t events) {
             right_last_edge_time = current_time;
 
             right_notch_count++;
+
             float distance = (float)right_notch_count / ENCODER_NOTCHES * WHEEL_CIRCUMFERENCE;
+
 
             printf("Right motor: Pulse width = %d us, Notch count = %d, Distance = %.2f cm\n", pulse_width, right_notch_count, distance);
         }
