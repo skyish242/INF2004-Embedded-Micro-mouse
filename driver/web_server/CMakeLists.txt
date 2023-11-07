@@ -22,6 +22,7 @@ target_link_libraries(${PROGRAM_NAME}
     pico_lwip_http
     pico_stdlib
     hardware_adc
+    motorLib
 )
 
 pico_enable_stdio_usb(${PROGRAM_NAME} TRUE)

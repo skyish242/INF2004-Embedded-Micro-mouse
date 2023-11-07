@@ -169,6 +169,7 @@ bool timer_callback(struct repeating_timer *t) {
             color_changed = false;
             lineTimings[timer_index] = time_us_64();
             timer_index++;
+            printf("Color changed.\n");
         }
     }
 
@@ -177,6 +178,7 @@ bool timer_callback(struct repeating_timer *t) {
             color_changed = true;
             lineTimings[timer_index] = time_us_64();
             timer_index++;
+            printf("Color changed.\n");
         }
     }
 
@@ -244,7 +246,8 @@ bool timer_callback(struct repeating_timer *t) {
 void detectLine(){
     adc_select_input(0);
     uint16_t adc_value = adc_read();
-    printf("%d", adc_value);
+    printf("%d\n", adc_value);
+    sleep_ms(500);
 }
 
 int main(void) {
@@ -257,6 +260,7 @@ int main(void) {
     add_repeating_timer_ms(50, timer_callback, NULL, &timer);
 
     while (true) {
+        // detectLine();
     }
 
     return 0;

@@ -3,8 +3,11 @@
 #include "hardware/gpio.h"
 #include "pico/time.h"
 
-const uint TRIG_PIN = 18;  // GPIO 2 for the TRIG pin
-const uint ECHO_PIN = 19;  // GPIO 3 for the ECHO pin
+#include "motor.h"
+
+const uint TRIG_PIN = 18;  // GPIO 18 for the TRIG pin
+const uint ECHO_PIN = 19;  // GPIO 19 for the ECHO pin
+
 
 static absolute_time_t start_time;
 static absolute_time_t end_time;
@@ -48,6 +51,9 @@ void setup() {
 
 int main() {
     setup();
+    motorInit();
+    setupPWM(0);
+    setupPWM(1);
 
     double filtered_distance_cm = 0; // Initialize the filtered distance
     while (1) {
@@ -70,9 +76,9 @@ int main() {
         // Use the Kalman filter to estimate the distance
         filtered_distance_cm = kalman(distance_cm);
 
-        printf("(Distance: %.2f cm)\n",filtered_distance_cm);
 
-        if (filtered_distance_cm <= 5.0) {
+        if (distance_cm <= 5.0) {
+            moveRight();
             printf("Warning: Object is within 5 cm!\n");
         }
 

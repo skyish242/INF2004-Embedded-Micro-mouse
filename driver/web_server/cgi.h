@@ -87,19 +87,20 @@ const char * cgi_map_handler(int iIndex, int iNumParams, char *pcParam[], char *
 
 // CGI handler which is run when a request for /car_move.cgi is detected
 const char * cgi_car_movement_handler(int iIndex, int iNumParams, char *pcParam[], char *pcValue[]){
-    
     // Check if the car is ordered to move (/car_movement.cgi?move=x)
     if (strcmp(pcParam[0] , "move") == 0){
         if (strcmp(pcValue[0] , "left") == 0){
+            motor_init();
+            printf("Motor initialised\n");
             moveLeft();
             printf("Left initiated\n");
-        }else if(strcmp(pcValue[0] , "right\n") == 0){
+        }else if(strcmp(pcValue[0] , "right") == 0){
             moveRight();
             printf("Right initiated");
-        }else if(strcmp(pcValue[0] , "forward\n") == 0){
+        }else if(strcmp(pcValue[0] , "forward") == 0){
             moveForward();
             printf("Forward initiated");
-        }else if(strcmp(pcValue[0] , "backward\n") == 0){
+        }else if(strcmp(pcValue[0] , "backward") == 0){
             moveBackward();
             printf("Backward initiated");
         }

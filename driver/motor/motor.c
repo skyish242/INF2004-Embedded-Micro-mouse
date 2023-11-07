@@ -8,19 +8,6 @@
 #include "hardware/pwm.h"
 #include "motor.h"
 
-// Define GPIO pins for motor input
-#define IN1 10  // Input 1 for Motor A
-#define IN2 11  // Input 2 for Motor A
-#define IN3 12  // Input 1 for Motor B
-#define IN4 13  // Input 2 for Motor B
-
-// Define GPIO pins for PWM
-#define LEFT_MOTOR_PWM 0
-#define RIGHT_MOTOR_PWM 1
-
-// Define duty cycle to be 50%
-#define DUTY_CYCLE 12500/2
-
 // Initialise motor control pins as output
 void motorInit() {
     gpio_init(IN1);
@@ -113,6 +100,26 @@ void moveForward() {
 void moveLeft() {
 
     // Motor A
+    gpio_put(IN1, 1);
+    gpio_put(IN2, 0);
+
+    // Motor B
+    gpio_put(IN3, 0);
+    gpio_put(IN4, 1);
+
+
+    // Set duty cycle of PWM signal on channel A of the specified PWM slice to 50%
+    setMotorLeft(DUTY_CYCLE);
+    setMotorRight(DUTY_CYCLE);
+
+
+    // sleep_ms(600);
+    // moveForward();
+}
+
+// Move right
+void moveRight() {
+    // Motor A
     gpio_put(IN1, 0);
     gpio_put(IN2, 1);
 
@@ -124,26 +131,8 @@ void moveLeft() {
     setMotorLeft(DUTY_CYCLE);
     setMotorRight(DUTY_CYCLE);
 
-    sleep_ms(600);
-    moveForward();
-}
-
-// Move right
-void moveRight() {
-    // Motor A
-    gpio_put(IN1, 1);
-    gpio_put(IN2, 0);
-
-    // Motor B
-    gpio_put(IN3, 0);
-    gpio_put(IN4, 1);
-
-    // Set duty cycle of PWM signal on channel A of the specified PWM slice to 50%
-    setMotorLeft(DUTY_CYCLE);
-    setMotorRight(DUTY_CYCLE);
-
-    sleep_ms(600);
-    moveForward();
+    // sleep_ms(600);
+    // moveForward();
 }
 
 // Stop both motors
@@ -162,25 +151,36 @@ void stopMotors(){
     setMotorRight(0);
 }
 
-int main() {
 
-    // Initialisation
-    stdio_init_all();
+void motor_init(){
+
     motorInit();
 
     setupPWM(LEFT_MOTOR_PWM);
     setupPWM(RIGHT_MOTOR_PWM);
 
-    while (1) {
-        moveForward();
-        sleep_ms(5000);
-        moveLeft();
-        sleep_ms(5000);
-        moveBackward();
-        sleep_ms(5000);
-        moveRight();
-        sleep_ms(5000);
-        
-    }
-
 }
+
+// int main() {
+
+//     // Initialisation
+//     stdio_init_all();
+//     motorInit();
+
+//     setupPWM(LEFT_MOTOR_PWM);
+//     setupPWM(RIGHT_MOTOR_PWM);
+
+//     while (1) {
+//         moveForward();
+//         sleep_ms(5000);
+//         moveLeft();
+//         sleep_ms(5000);
+//         moveBackward();
+//         sleep_ms(5000);
+//         moveRight();
+//         sleep_ms(5000);
+        
+//     }
+
+// }
+
