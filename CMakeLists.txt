@@ -32,3 +32,45 @@ if (CMAKE_C_COMPILER_ID STREQUAL "GNU")
 endif()
 
 add_subdirectory(driver)
+
+set(FREERTOS_KERNEL_PATH ${CMAKE_CURRENT_LIST_DIR}/lib/FreeRTOS-Kernel-main)
+
+if (NOT FREERTOS_KERNEL_PATH AND NOT DEFINED ENV{FREERTOS_KERNEL_PATH})
+    message("Skipping Pico W FreeRTOS examples as FREERTOS_KERNEL_PATH not defined")
+else()
+    include(FreeRTOS_Kernel_import.cmake)
+endif()
+
+set(PROGRAM_NAME main)
+add_executable(${PROGRAM_NAME}
+    main.c
+    main.h
+)
+
+target_include_directories(${PROGRAM_NAME} PUBLIC
+    ${CMAKE_CURRENT_LIST_DIR}
+    ${CMAKE_SOURCE_DIR}/driver/magnometer # Include the magnometer directory
+    # ${CMAKE_SOURCE_DIR}/driver/motor # Include the motor directory
+    ${CMAKE_SOURCE_DIR}/driver/web_server # Include the web_server directory
+    ${CMAKE_SOURCE_DIR}/driver/irline # Include the irline directory
+    ${CMAKE_SOURCE_DIR}/driver/ultrasonic # Include the ultrasonic directory
+    ${CMAKE_SOURCE_DIR}/driver/mapping # Include the mapping directory
+)
+
+target_link_libraries(${PROGRAM_NAME}
+    pico_cyw43_arch_lwip_threadsafe_background
+    pico_stdlib
+    pico_lwip_http
+    hardware_adc
+    hardware_pwm
+    hardware_i2c
+    FreeRTOS-Kernel-Heap4 # FreeRTOS kernel and dynamic heap
+    motorLib
+    magnoLib
+    irLineLib
+    floodfillLib
+)
+
+pico_enable_stdio_usb(${PROGRAM_NAME} 1)
+pico_enable_stdio_uart(${PROGRAM_NAME} 0)
+pico_add_extra_outputs(${PROGRAM_NAME})
