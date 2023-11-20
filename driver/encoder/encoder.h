@@ -12,6 +12,7 @@
 
 static float left_speed;
 static float right_speed;
+volatile float distance;
 
 void encoder_callback(uint gpio, uint32_t events);
 

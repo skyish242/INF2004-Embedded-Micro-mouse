@@ -33,7 +33,7 @@ void encoder_callback(uint gpio, uint32_t events) {
             // Increment the notch count by 1 and calculate distance travelled
             left_notch_count++;
 
-            float distance = (float)left_notch_count / ENCODER_NOTCHES * WHEEL_CIRCUMFERENCE;
+            distance = (float)left_notch_count / ENCODER_NOTCHES * WHEEL_CIRCUMFERENCE;
 
             left_speed = (WHEEL_CIRCUMFERENCE/ENCODER_NOTCHES) / (pulse_width / 1000000.0);
 
@@ -48,7 +48,7 @@ void encoder_callback(uint gpio, uint32_t events) {
 
             right_notch_count++;
 
-            float distance = (float)right_notch_count / ENCODER_NOTCHES * WHEEL_CIRCUMFERENCE;
+            distance = (float)right_notch_count / ENCODER_NOTCHES * WHEEL_CIRCUMFERENCE;
 
             right_speed = (WHEEL_CIRCUMFERENCE/ENCODER_NOTCHES) / (pulse_width / 1000000.0);
 
