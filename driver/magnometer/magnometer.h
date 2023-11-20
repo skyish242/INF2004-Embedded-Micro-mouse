@@ -46,7 +46,7 @@ typedef struct {
 } mag_t;
 
 // Declare functions for later use
-void get_direction();
+int get_direction();
 void lsm303dlh_acc_setup();
 void lsm303dlh_mag_setup();
 void lsm303dlh_read_acc(accel_t *acc);

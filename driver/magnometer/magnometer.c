@@ -1,6 +1,6 @@
 #include "magnometer.h"
 
-void get_direction() {
+int get_direction() {
    // Check if the default I2C pins are defined, which will be GPIO 4 (SDA) and 5 (SCL), both I2C0
    
    #if !defined(i2c_default) || !defined(PICO_DEFAULT_I2C_SDA_PIN) || !defined(PICO_DEFAULT_I2C_SCL_PIN)
@@ -21,11 +21,12 @@ void get_direction() {
 
    // Continuous loop to read magnetometer data and compute the angle
    // Here is where we print the X, Y, Z values and the bearings
-   while (true) {
-      lsm303dlh_read_mag(&mag);
-      int32_t angle = get_angle(&mag);
-      printf("X = %d, Y = %d, Z = %d, Angle = %d degrees\n", mag.x, mag.y, mag.z, angle);
-   }
+   
+   lsm303dlh_read_mag(&mag);
+   int32_t angle = get_angle(&mag);
+   printf("X = %d, Y = %d, Z = %d, Angle = %d degrees\n", mag.x, mag.y, mag.z, angle);
+   return angle;
+   
 
    #endif
 }
