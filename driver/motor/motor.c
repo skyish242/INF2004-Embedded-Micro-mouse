@@ -56,9 +56,7 @@ void setupPWM (uint gpio) {
     pwm_set_clkdiv(slice_num, 100);
 
     // Set PWM wrap value to determine period of PWM signal
-    // Set desired PWM frequency of 50khz
-    // Wrap value = System Clock Frequency / Desired PWM frequency
-    // Period of PWM signal = ((1 / 125Mhz) * (125Mz/50khz)) = 20 microseconds
+    // Period of PWM signal = ((1 / 12.5Mhz) * 12500) = 10ms
     pwm_set_wrap(slice_num, 12500);
 
     // Enable PWM
