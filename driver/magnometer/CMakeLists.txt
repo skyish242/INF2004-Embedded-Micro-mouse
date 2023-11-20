@@ -10,8 +10,11 @@ add_executable(magnometer
    magnometer.c
 )
 
+add_library(magnoLib magnometer.c)
+
 # pull in common dependencies and additional i2c hardware support
 target_link_libraries(magnometer pico_stdlib hardware_i2c)
+target_link_libraries(magnoLib pico_stdlib hardware_i2c)
 
 # enable usb output, disable uart output
 pico_enable_stdio_usb(magnometer 1)

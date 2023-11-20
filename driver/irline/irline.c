@@ -1,7 +1,3 @@
-// #include <stdio.h>
-// #include "pico/stdlib.h"
-// #include "hardware/gpio.h"
-// #include "hardware/adc.h"
 #include "irline.h"
 
 uint32_t lineTimings[BUFFER_SIZE];
@@ -185,8 +181,9 @@ bool timer_callback(struct repeating_timer *t) {
     // One 9 element character has been read and can be now decoded and returned
     if (timer_index >= BUFFER_SIZE) {
         int max1, max2, max3;
-        int binBarcode[BUFFER_SIZE - 1];
-        int reversedBinBarcode[BUFFER_SIZE - 1];
+        bool reversed = false;
+        int binBarcode[9];
+        int reversedBinBarcode[9];
         getElapsedTimes(lineTimings); // Get timing differences between each color change in the barcode
 
         findTopThree(elapsedTimes, &max1, &max2, &max3); // Find the three wide barcodes
@@ -198,47 +195,61 @@ bool timer_callback(struct repeating_timer *t) {
         reverseBinaryArray(binBarcode, reversedBinBarcode); // Reverse the barcode so that able to read barcode backwards as well
         char reversedCharBarcode = decodeCode39(reversedBinBarcode); // decode the barcode into a character based on the Code 39 standard
 
-        // // Cancel the barcode reading if cannot read the barcode
-        // if (charBarcode == '?' && reversedCharBarcode == '?') {
-        //     // cancel_repeating_timer(t);
-        //     printf("Invalid char");
-        // }
+        // Check if it's the starting or ending asterisk
+        if (charBarcode == '*') {
+            if (barcodeReading[0] == '*') {
+                printf("Valid Barcode\n");
+                printf("%c\n", barcodeReading[1]);
+            }
+            else {
+                printf("First Asterisk detected\n");
+                barcodeReading[0] = '*';
+            }
+        }
 
-        // // Check if it's the starting or ending asterisk
-        // if (charBarcode == '*' || reversedCharBarcode == '*') {
-        //     if (barcodeReading[0] == '*') {
-        //         printf("%c\n", barcodeReading[1]);
-        //     }
-        //     else {
-        //         printf("Asterisk detected");
-        //         barcodeReading[0] = '*';
-        //     }
-        // }
+        else if (reversedCharBarcode == '*'){
+            reversed = true;
+            if (barcodeReading[0] == '*') {
+                printf("Valid Barcode\n");
+                printf("%c\n", barcodeReading[1]);
+            }
+            else {
+                printf("Reversed Asterisk detected\n");
+                barcodeReading[0] = '*';
+            }
+        }
 
-        // // It's a valid character
-        // else {
-        //     // This means that after scanning a character, another character was scanned, thus invalid barcode
-        //     if (barcodeReading[1] != '\0') {
-        //         cancel_repeating_timer(t);
-        //     }
-        //     // Check if it's the forward or reversed reading
-        //     else if (charBarcode != '?') {
-        //         barcodeReading[1] = charBarcode;
-        //     }
-        //     else {
-        //         barcodeReading[1] = reversedCharBarcode;
-        //     }
-        // }
+        // It's a valid character
+        else {
+            // This means that after scanning a character, another character was scanned, thus invalid barcode
+            if (barcodeReading[1] != '\0') {
+                // cancel_repeating_timer(t);
+                printf("Invalid char\n");
+            }
+            // Check if it's the forward or reversed reading
+            else if (!reversed) {
+                barcodeReading[1] = charBarcode;
+            }
+            else {
+                barcodeReading[1] = reversedCharBarcode;
+            }
+        }
 
         for (int i = 0; i < BUFFER_SIZE - 1; i++) {
             printf("%d ", binBarcode[i]);
             // printf("Elapsed Time %d: %lu us\n", i, elapsed_times[i]);
         }
-        printf("\n%c\n", charBarcode);
+        printf("\n");
+        for (int i = 0; i < BUFFER_SIZE - 1; i++) {
+            printf("%d ", reversedBinBarcode[i]);
+            // printf("Elapsed Time %d: %lu us\n", i, elapsed_times[i]);
+        }
+        printf("\n");
+        printf("\nChar: %c\n", charBarcode);
+        printf("\nReversed Char: %c\n", reversedCharBarcode);
         printf("End of one char\n");
         timer_index = 0;
         color_changed = true;
-        // cancel_repeating_timer(t);
     }
     return true;
 }
@@ -247,21 +258,20 @@ void detectLine(){
     adc_select_input(0);
     uint16_t adc_value = adc_read();
     printf("%d\n", adc_value);
-    sleep_ms(500);
 }
 
-int main(void) {
-    stdio_init_all();
-    adc_init();
-    adc_gpio_init(26);
+// int main(void) {
+//     stdio_init_all();
+//     adc_init();
+//     adc_gpio_init(26);
 
-    struct repeating_timer timer;
+//     struct repeating_timer timer;
 
-    add_repeating_timer_ms(50, timer_callback, NULL, &timer);
+//     add_repeating_timer_ms(50, timer_callback, NULL, &timer);
 
-    while (true) {
-        // detectLine();
-    }
+//     while (true) {
+//         // detectLine();
+//     }
 
-    return 0;
-}
+//     return 0;
+// }
