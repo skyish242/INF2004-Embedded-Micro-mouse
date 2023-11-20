@@ -1,10 +1,11 @@
 #ifndef MOTOR_H
 #define MOTOR_H
 
-
 #include <stdio.h>
 #include "pico/stdlib.h"
 #include "hardware/pwm.h"
+#include "motor.h"
+#include "encoder.h"
 
 // Define GPIO pins for motor input
 #define IN1 10  // Input 1 for Motor A

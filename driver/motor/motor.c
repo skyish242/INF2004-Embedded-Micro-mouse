@@ -4,10 +4,7 @@
  * SPDX-License-Identifier: BSD-3-Clause
  */
 
-#include "pico/stdlib.h"
-#include "hardware/pwm.h"
 #include "motor.h"
-#include "encoder.h"
 
 float integral = 0.0;
 float prev_error = 0.0;
