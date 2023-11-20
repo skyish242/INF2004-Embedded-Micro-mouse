@@ -6,14 +6,13 @@
 #include "pico/stdlib.h"
 #include "hardware/pwm.h"
 
-// Define GP2 and GP3 for the left and right encoders
+// Define GP21 and GP22 for the left and right encoders
 #define LEFT_ENCODER_PIN 21
-#define LEFT_VCC 22
-#define RIGHT_ENCODER_PIN 8
-#define RIGHT_VCC 9
+#define RIGHT_ENCODER_PIN 22
+
+static float left_speed;
+static float right_speed;
 
 void encoder_callback(uint gpio, uint32_t events);
-float left_speed();
-float right_speed();
 
 #endif /* ENCODER_H */

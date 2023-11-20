@@ -13,24 +13,6 @@
 const uint32_t ENCODER_NOTCHES = 20;
 const float WHEEL_CIRCUMFERENCE = 21.05; // Approximation
 
-float left_speed(){
-    static uint32_t left_left_time = 0;
-    uint32_t current_time = time_us_32();
-    if (left_left_time != 0) {
-        return WHEEL_CIRCUMFERENCE / ((current_time - left_left_time) / 1000000.0);
-    }
-    return 0.0;
-}
-
-float right_speed(){
-    static uint32_t left_right_time = 0;
-    uint32_t current_time = time_us_32();
-    if (left_right_time != 0) {
-        return WHEEL_CIRCUMFERENCE / ((current_time - left_right_time) / 1000000.0);
-    }
-    return 0.0;
-}
-
 void encoder_callback(uint gpio, uint32_t events) {
     // Encoder variables for distance and speed
     static uint32_t left_notch_count = 0; // To count each time notch has been detected 
@@ -38,39 +20,39 @@ void encoder_callback(uint gpio, uint32_t events) {
     static uint32_t right_notch_count = 0; 
     static uint32_t right_last_edge_time = 0; 
 
-    // Get the current time in microseconds
-    uint32_t current_time = time_us_32();
     uint32_t pulse_width; 
-
     // Check the GPIO pin that triggered the interrupt
     if (gpio == LEFT_ENCODER_PIN) {
         if (events & GPIO_IRQ_EDGE_RISE) {
             // Calculate the pulse width by subtracting last edge time from current time
-            pulse_width = current_time - left_last_edge_time;
+            pulse_width = time_us_32() - left_last_edge_time;
 
             // Update the last edge time
-            left_last_edge_time = current_time;
+            left_last_edge_time = time_us_32();
 
             // Increment the notch count by 1 and calculate distance travelled
             left_notch_count++;
 
             float distance = (float)left_notch_count / ENCODER_NOTCHES * WHEEL_CIRCUMFERENCE;
 
+            left_speed = (WHEEL_CIRCUMFERENCE/ENCODER_NOTCHES) / (pulse_width / 1000000.0);
+
             // Print the results
-            printf("Left motor: Speed: %f, Pulse width = %d us, Notch count = %d, Distance = %.2f cm\n", left_speed(), pulse_width, left_notch_count, distance);
+            printf("Left motor: Speed: %.2f cm/s, Pulse width = %d us, Notch count = %d, Distance = %.2f cm\n", left_speed, pulse_width, left_notch_count, distance);
         }
     } else if (gpio == RIGHT_ENCODER_PIN) {
         if (events & GPIO_IRQ_EDGE_RISE) {
-            pulse_width = current_time - right_last_edge_time;
+            pulse_width = time_us_32() - right_last_edge_time;
 
-            right_last_edge_time = current_time;
+            right_last_edge_time = time_us_32();
 
             right_notch_count++;
 
             float distance = (float)right_notch_count / ENCODER_NOTCHES * WHEEL_CIRCUMFERENCE;
 
+            right_speed = (WHEEL_CIRCUMFERENCE/ENCODER_NOTCHES) / (pulse_width / 1000000.0);
 
-            printf("Right motor: Speed: %f, Pulse width = %d us, Notch count = %d, Distance = %.2f cm\n", right_speed(), pulse_width, right_notch_count, distance);
+            printf("Right motor: Speed: %.2f cm/s, Pulse width = %d us, Notch count = %d, Distance = %.2f cm\n", right_speed, pulse_width, right_notch_count, distance);
         }
     }
 }

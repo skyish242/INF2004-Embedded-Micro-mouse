@@ -9,6 +9,8 @@
 #include "motor.h"
 #include "encoder.h"
 
+float integral = 0.0;
+float prev_error = 0.0;
 
 // Initialise motor control pins as output
 void motorInit() {
@@ -25,21 +27,21 @@ void motorInit() {
 }
 
 // Compute PID 
-float compute_pid(float setpoint, float current_val, float integral, float prev_error, float Kp, float Ki, float Kd){
+float compute_pid(float setpoint, float current_val, float *integral, float *prev_error, float Kp, float Ki, float Kd){
     // Compute error
     float error = setpoint - current_val;
     
     // Update integral term
-    integral += error;
+    *integral += error;
     
     // Compute derivative term
-    float derivative = error - prev_error;
+    float derivative = error - *prev_error;
     
     // Compute control signal
-    float control_signal = Kp * error + Ki * (integral) + Kd * derivative;
+    float control_signal = Kp * error + Ki * (*integral) + Kd * derivative;
     
     // Update previous error
-    prev_error = error; 
+    *prev_error = error; 
     
     return control_signal;
 }
@@ -57,9 +59,9 @@ void setupPWM (uint gpio) {
     pwm_set_clkdiv(slice_num, 100);
 
     // Set PWM wrap value to determine period of PWM signal
-    // Set desired PWM frequency of 20khz
+    // Set desired PWM frequency of 50khz
     // Wrap value = System Clock Frequency / Desired PWM frequency
-    // Period of PWM signal = ((1 / 12.5Mhz) * (125Mz/20khz)) = 500 microseconds
+    // Period of PWM signal = ((1 / 125Mhz) * (125Mz/50khz)) = 20 microseconds
     pwm_set_wrap(slice_num, 12500);
 
     // Enable PWM
@@ -72,7 +74,7 @@ void setMotorLeft() {
     // Find out which PWM slice is connected to the GPIO 
     uint slice_num = pwm_gpio_to_slice_num(LEFT_MOTOR_PWM);
 
-    uint16_t val = compute_pid(SETPOINT, left_speed(), 0.0 , 0.0, KP_LEFT, KI_LEFT, KD_LEFT) + DUTY_CYCLE;
+    uint16_t val = compute_pid(SETPOINT, left_speed, &integral , &prev_error, KP_LEFT, KI_LEFT, KD_LEFT);
 
     // Set duty cycle of PWM signal on channel A of the specified PWM slice to pwm_value
     pwm_set_chan_level(slice_num, PWM_CHAN_A, val);
@@ -84,7 +86,7 @@ void setMotorRight() {
     // Find out which PWM slice is connected to the GPIO 
     uint slice_num = pwm_gpio_to_slice_num(RIGHT_MOTOR_PWM);
 
-    uint16_t val = compute_pid(SETPOINT, right_speed(), 0.0 , 0.0, KP_RIGHT, KI_RIGHT, KD_RIGHT) + DUTY_CYCLE;
+    uint16_t val = compute_pid(SETPOINT, right_speed, &integral, &prev_error, KP_RIGHT, KI_RIGHT, KD_RIGHT);
 
     // Set duty cycle of PWM signal on channel A of the specified PWM slice to pwm_value
     pwm_set_chan_level(slice_num, PWM_CHAN_B, val);
@@ -94,32 +96,24 @@ void setMotorRight() {
 void moveBackward() {
 
     // Motor A
-    gpio_put(IN1, 1);
-    gpio_put(IN2, 0);
-
-    // Motor B
-    gpio_put(IN3, 1);
-    gpio_put(IN4, 0);
-
-    // Set duty cycle of PWM signal on channel A of the specified PWM slice to 50%
-    setMotorLeft();
-    setMotorRight();
-}
-
-// Move forward 
-void moveForward() {
-
-    // Motor A
     gpio_put(IN1, 0);
     gpio_put(IN2, 1);
 
     // Motor B
     gpio_put(IN3, 0);
     gpio_put(IN4, 1);
+}
 
-    // Set duty cycle of PWM signal on channel A of the specified PWM slice to 50%
-    setMotorLeft();
-    setMotorRight();
+// Move forward 
+void moveForward() {
+
+    // Motor A
+    gpio_put(IN1, 1);
+    gpio_put(IN2, 0);
+
+    // Motor B
+    gpio_put(IN3, 1);
+    gpio_put(IN4, 0);
 }
 
 // Move left
@@ -132,11 +126,6 @@ void moveLeft() {
     // Motor B
     gpio_put(IN3, 0);
     gpio_put(IN4, 1);
-
-
-    // Set duty cycle of PWM signal on channel A of the specified PWM slice to 50%
-    setMotorLeft();
-    setMotorRight();
 }
 
 // Move right
@@ -148,10 +137,6 @@ void moveRight() {
     // Motor B
     gpio_put(IN3, 1);
     gpio_put(IN4, 0);
-
-    // Set duty cycle of PWM signal on channel A of the specified PWM slice to 50%
-    setMotorLeft();
-    setMotorRight();
 }
 
 // Stop both motors
@@ -173,22 +158,14 @@ int main() {
     stdio_init_all();
     motorInit();
 
-    // Set pin as high for left encoder
-    gpio_init(LEFT_VCC);
-    gpio_set_dir(LEFT_VCC, GPIO_OUT);
-    gpio_put(LEFT_VCC, 1);
-
-    // Set pin as high for right encoder
-    gpio_init(RIGHT_VCC);
-    gpio_set_dir(RIGHT_VCC, GPIO_OUT);
-    gpio_put(RIGHT_VCC, 1);
-
     // Set up the interrupt to trigger encoder_callback when rising edge is detected
     gpio_set_irq_enabled_with_callback(LEFT_ENCODER_PIN, GPIO_IRQ_EDGE_RISE, true, &encoder_callback);
     gpio_set_irq_enabled_with_callback(RIGHT_ENCODER_PIN, GPIO_IRQ_EDGE_RISE, true, &encoder_callback);
 
     while (1) {
         moveForward();
+        setMotorLeft();
+        setMotorRight();
     }
 }
 
