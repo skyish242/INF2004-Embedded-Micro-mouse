@@ -1,12 +1,16 @@
 add_executable(encoder
         encoder.c
+        encoder.h
         )
 
-target_link_libraries(encoder pico_stdlib hardware_adc hardware_pwm motorLib)
+add_library(encoderLib encoder.h encoder.c)
 
-target_include_directories(encoder PRIVATE
+target_link_libraries(encoder pico_stdlib hardware_adc hardware_pwm)
+target_link_libraries(encoderLib pico_stdlib hardware_adc hardware_pwm)
+
+target_include_directories(encoder PUBLIC
     ${CMAKE_CURRENT_SOURCE_DIR}
-    ${CMAKE_SOURCE_DIR}/driver/motor
+    # ${CMAKE_SOURCE_DIR}/driver/motor
 )
 
 # create map/bin/hex file etc.

@@ -17,12 +17,21 @@
 #define RIGHT_MOTOR_PWM 1
 
 // Define duty cycle to be 50%
-#define DUTY_CYCLE 12500/2
+#define DUTY_CYCLE 65535/2
+
+// Define PID Controller Parameters 
+#define SETPOINT 50
+#define KP_RIGHT 1.0
+#define KI_RIGHT 0.1
+#define KD_RIGHT 0.01
+#define KP_LEFT 1.0
+#define KI_LEFT 0.1
+#define KD_LEFT 0.01
 
 void motorInit();
 void setupPWM(uint gpio);
-void setMotorLeft(int16_t pwm_value);
-void setMotorRight(int16_t pwm_value);
+void setMotorLeft();
+void setMotorRight();
 
 void moveForward();
 void moveBackward();
