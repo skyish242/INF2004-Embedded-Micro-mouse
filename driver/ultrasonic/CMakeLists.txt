@@ -1,5 +1,6 @@
 add_executable(ultrasonic
         ultrasonic.c
+        ultrasonic.h
         )
 
 target_link_libraries(ultrasonic pico_stdlib hardware_adc hardware_pwm motorLib)
