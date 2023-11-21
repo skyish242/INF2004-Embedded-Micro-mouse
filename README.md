@@ -96,6 +96,10 @@ This algorithm can work for finding an "exit" but when the robot first enters th
   
 </details>
 
+### Block Diagram and Flowchart
+
+![Flowchat BlockDiagram](https://github.com/skyish242/INF2004-Embedded-Micro-mouse/assets/46911283/bbe63515-4838-4f47-8ec4-f8a970e84a47)
+
 ## Acknowledgments
 
 ChatAi revolutionize my life
