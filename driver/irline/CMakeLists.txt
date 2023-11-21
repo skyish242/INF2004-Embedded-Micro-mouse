@@ -1,8 +1,9 @@
 add_executable(irline
         irline.c
+        irline.h
         )
 
-add_library(irLineLib irline.c)
+add_library(irLineLib irline.h irline.c)
 
 target_link_libraries(irline pico_stdlib hardware_adc hardware_pwm)
 target_link_libraries(irLineLib pico_stdlib hardware_adc hardware_pwm)

@@ -254,24 +254,32 @@ bool timer_callback(struct repeating_timer *t) {
     return true;
 }
 
-void detectLine(){
-    adc_select_input(0);
-    uint16_t adc_value = adc_read();
-    printf("%d\n", adc_value);
+int detectLine(int adc_input){
+    while (true) {
+        adc_select_input(adc_input);
+        uint16_t adc_value = adc_read();
+        printf("ADC Value: %d\n", adc_value);
+        // if (adc_value >= LINE_THRESHOLD) {
+        //     return true;
+        // }
+        // else {
+        //     return false;
+        // }
+    }
 }
 
-// int main(void) {
-//     stdio_init_all();
-//     adc_init();
-//     adc_gpio_init(26);
+int scan_barcode() {
+    stdio_init_all();
+    adc_init();
+    adc_gpio_init(28);
 
-//     struct repeating_timer timer;
+    struct repeating_timer timer;
 
-//     add_repeating_timer_ms(50, timer_callback, NULL, &timer);
+    add_repeating_timer_ms(50, timer_callback, NULL, &timer);
 
-//     while (true) {
-//         // detectLine();
-//     }
+    while (true) {
+        // detectLine();
+    }
 
-//     return 0;
-// }
+    return 0;
+}
