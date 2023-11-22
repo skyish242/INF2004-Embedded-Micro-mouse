@@ -33,15 +33,9 @@ a _PID controller_ enhances the car's control system, ensuring smooth and accura
 
 ## Getting Started
 
-Meow Meow Meow Meow Meow
-
 ### Prerequisites
 
-Woof Woof Woof Woof 
-
 ### Installation
-
-Woof Woof Woof Woof 
 
 ## Usage
 
