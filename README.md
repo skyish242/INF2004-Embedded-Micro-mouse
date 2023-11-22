@@ -93,4 +93,5 @@ This algorithm can work for finding an "exit" but when the robot first enters th
 ### Block Diagram and Flowchart
 https://drive.google.com/file/d/1M9YKE0fn1Jph__agKvQvMAuTRTzeHVLL/view?usp=sharing
 
-![Flowchat BlockDiagram](https://github.com/skyish242/INF2004-Embedded-Micro-mouse/assets/46911283/1c607852-4c81-4085-ab5b-78d53a37c15d)
+![Flowchat BlockDiagram](https://github.com/skyish242/INF2004-Embedded-Micro-mouse/assets/46911283/28327d93-0821-4a9b-a6eb-01c042940ffc)
+
