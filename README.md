@@ -5,7 +5,7 @@ a _PID controller_ enhances the car's control system, ensuring smooth and accura
 
 ## Table of Contents
 
-- [Team Members](#introduction)
+- [Team Members](#team-members)
 - [Getting Started](#getting-started)
 - [Integration](#integration)
 - [GPIO Pins](#gpio-pins)
@@ -53,23 +53,23 @@ recognizing barcodes.
 ![EmbeddedDiagram](https://github.com/skyish242/INF2004-Embedded-Micro-mouse/assets/46911283/e2605169-2ba2-4549-96ea-a6ee783fa92c)
 
 ## GPIO Pins
-| `Pin Number`| `Usage`       |
-| ------------|:-------------:|
-| GPIO 0      | L298N Module ENB              |
-| GPIO 1      | L298N Module ENA              |
-| GPIO 4      | Magnetometer SDA              |
-| GPIO 5      | Magnetometer SCL              |
-| GPIO 10     | L298N Module IN4              |
-| GPIO 11     | L298N Module IN3              |
-| GPIO 12     | L298N Module IN2              |
-| GPIO 13     | L298N Module IN1              |
-| GPIO 18     | Ultrasonic TRIG              |
-| GPIO 19     | Ultrasonic ECHO              |
-| GPIO 21     | Left Encoder              |
-| GPIO 22     | Right Encoder              |
-| GPIO 26     | Right IR              |
-| GPIO 27     | Left IR              |
-| GPIO 28     | Barcode IR              |
+| `Pin Number`| `Usage`       | `Sensor`      |
+| ------------|:-------------:|:-------------:|
+| GPIO 0      | ENB           | L298N Module |
+| GPIO 1      | ENA           | L298N Module |
+| GPIO 4      | SDA           | Magnetometer |
+| GPIO 5      | SCL           | Magnetometer |
+| GPIO 10     | IN4           | L298N Module |
+| GPIO 11     | IN3           | L298N Module |
+| GPIO 12     | IN2           | L298N Module |
+| GPIO 13     | IN1           | L298N Module |
+| GPIO 18     | TRIG          | Ultrasonic |
+| GPIO 19     | ECHO          | Ultrasonic |
+| GPIO 21     | OUT           | Left Encoder |
+| GPIO 22     | OUT           | Right Encoder |
+| GPIO 26     | AO            | Right IR |
+| GPIO 27     | AO            | Left IR |
+| GPIO 28     | AO            |  Barcode IR |
 
 ## Additional Resources
 
