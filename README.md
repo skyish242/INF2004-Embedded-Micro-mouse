@@ -52,7 +52,7 @@ recognizing barcodes.
 ![EmbeddedDiagram](https://github.com/skyish242/INF2004-Embedded-Micro-mouse/assets/46911283/e2605169-2ba2-4549-96ea-a6ee783fa92c)
 
 ## GPIO Pins
-| 'Pin Number'| 'Usage'     |
+| `Pin Number`| `Usage`       |
 | ------------|:-------------:|
 | GPIO 0      |               |
 | GPIO 1      |               |
