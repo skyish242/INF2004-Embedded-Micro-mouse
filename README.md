@@ -39,6 +39,7 @@ recognizing barcodes.
 <details>
 <summary>Parts Needed/Sensors</summary>
 2x Motor <br>
+1x L298N Motor Driver Module <br>
 2x Encoder <br>
 1x Ultrasonic Sensor <br>
 3x IR Sensor <br>
@@ -54,32 +55,21 @@ recognizing barcodes.
 ## GPIO Pins
 | `Pin Number`| `Usage`       |
 | ------------|:-------------:|
-| GPIO 0      |               |
-| GPIO 1      |               |
-| GPIO 2      |               |
-| GPIO 3      |               |
-| GPIO 4      |               |
-| GPIO 5      |               |
-| GPIO 6      |               |
-| GPIO 7      |               |
-| GPIO 8      |               |
-| GPIO 9      |               |
-| GPIO 10     |               |
-| GPIO 11     |               |
-| GPIO 12     |               |
-| GPIO 13     |               |
-| GPIO 14     |               |
-| GPIO 15     |               |
-| GPIO 16     |               |
-| GPIO 17     |               |
-| GPIO 18     |               |
-| GPIO 19     |               |
-| GPIO 20     |               |
-| GPIO 21     |               |
-| GPIO 22     |               |
-| GPIO 23     |               |
-| GPIO 24     |               |
-| GPIO 25     |               |
+| GPIO 0      | L298N Module ENB              |
+| GPIO 1      | L298N Module ENA              |
+| GPIO 4      | Magnetometer SDA              |
+| GPIO 5      | Magnetometer SCL              |
+| GPIO 10     | L298N Module IN4              |
+| GPIO 11     | L298N Module IN3              |
+| GPIO 12     | L298N Module IN2              |
+| GPIO 13     | L298N Module IN1              |
+| GPIO 18     | Ultrasonic TRIG              |
+| GPIO 19     | Ultrasonic ECHO              |
+| GPIO 21     | Left Encoder              |
+| GPIO 22     | Right Encoder              |
+| GPIO 26     | Right IR              |
+| GPIO 27     | Left IR              |
+| GPIO 28     | Barcode IR              |
 
 ## Additional Resources
 
