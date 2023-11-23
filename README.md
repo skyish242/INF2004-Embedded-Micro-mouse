@@ -42,14 +42,14 @@ recognizing barcodes.
 
 <details>
 <summary>Parts Needed/Sensors</summary>
-2x Motor
-2x Encoder
-1x Ultrasonic Sensor
-3x IR Sensor
-1x Cable Connector Splitter
-1x Magnetometer
-4x AA Batteries
-1x AA Battery Holder
+2x Motor <br>
+2x Encoder <br>
+1x Ultrasonic Sensor <br>
+3x IR Sensor <br>
+1x Cable Connector Splitter <br>
+1x Magnetometer <br>
+4x AA Batteries <br>
+1x AA Battery Holder <br>
 </details>
 
 ## Integration
