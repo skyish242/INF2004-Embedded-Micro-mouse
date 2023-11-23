@@ -54,7 +54,7 @@ recognizing barcodes.
 ## GPIO Pins
 | `Pin Number`| `Usage`       |
 | ------------|:-------------:|
-| GPIO 0      |               |
+| GPIO 0      | wwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwww              |
 | GPIO 1      |               |
 | GPIO 2      |               |
 | GPIO 3      |               |
@@ -80,21 +80,6 @@ recognizing barcodes.
 | GPIO 23     |               |
 | GPIO 24     |               |
 | GPIO 25     |               |
-| GPIO 26     |               |
-| GPIO 27     |               |
-| GPIO 28     |               |
-| GPIO 29     |               |
-| GPIO 30     |               |
-| GPIO 31     |               |
-| GPIO 32     |               |
-| GPIO 33     |               |
-| GPIO 34     |               |
-| GPIO 35     |               |
-| GPIO 36     |               |
-| GPIO 37     |               |
-| GPIO 38     |               |
-| GPIO 39     |               |
-| GPIO 40     |               |
 
 ## Additional Resources
 
