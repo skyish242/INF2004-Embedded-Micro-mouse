@@ -42,26 +42,6 @@ a _PID controller_ enhances the car's control system, ensuring smooth and accura
 ## Additional Resources
 
 <details>
-<summary>General</summary>
-</details>
-
-<details>
-<summary>IR Sensor</summary>
-</details>
-
-<details>
-<summary>Ultrasonic Sensor</summary>
-</details>
-
-<details>
-<summary>Barcode Reading</summary>
-</details>
-
-<details>
-<summary>PID Controller for Navigation</summary>
-</details>
-
-<details>
 <summary>Mapping Algorithm</summary>
   
 ### Pledge Algorithm
