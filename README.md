@@ -80,9 +80,10 @@ This algorithm can work for finding an "exit" but when the robot first enters th
 </details>
 
 
-### GY511 LSM303DLHC Documentation
+### GY511 LSM303DLHC
 <details>
-<summary>https://cdn-shop.adafruit.com/datasheets/LSM303DLHC.PDF</summary>  
+<summary>Documentation</summary>
+https://cdn-shop.adafruit.com/datasheets/LSM303DLHC.PDF
 </details>
 
 ## Block Diagram & Flowchart
