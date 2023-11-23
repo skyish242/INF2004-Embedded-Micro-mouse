@@ -88,21 +88,17 @@ This algorithm can work for finding an "exit" but when the robot first enters th
   
 </details>
 
-<details>
-<summary>Block Diagram</summary>
+Block Diagram
 Block Diagram (https://drive.google.com/file/d/1rzfYkl3jkq1JCDhGWVK9S4dcBDvNVrC3/view?usp=sharing)
 ![Block Diagram Micromouse](https://github.com/skyish242/INF2004-Embedded-Micro-mouse/assets/46911283/e8e6b7a7-16f2-4d11-ade5-0a2eab0d12fc)
-</details>
 
-<details>
-<summary>Flowchart of Individual Sensors</summary>
+
+Flowchart of Individual Sensors
 Individual Sensors Flowchart (https://drive.google.com/file/d/1V1MQaxMbvh8Wvq6vHUziarrkZD12XFRi/view?usp=sharing)
 ![IndividualSensors](https://github.com/skyish242/INF2004-Embedded-Micro-mouse/assets/46911283/ca255fcd-0e10-41af-bd99-c20a543c3418)
-</details>
 
-<details>
-<summary>Flowchart of Floodfill/Mapping Algorithm</summary>
+Flowchart of Floodfill/Mapping Algorithm
 Floodfill/Mapping Flowchart (https://drive.google.com/file/d/1M9YKE0fn1Jph__agKvQvMAuTRTzeHVLL/view?usp=sharing)
 ![MappingAlgorithm](https://github.com/skyish242/INF2004-Embedded-Micro-mouse/assets/46911283/abd0f4be-ad72-4bf2-876c-6f64e7128b92)
-</details>
+
 
