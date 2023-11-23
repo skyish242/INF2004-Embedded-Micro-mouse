@@ -6,11 +6,8 @@ a _PID controller_ enhances the car's control system, ensuring smooth and accura
 ## Table of Contents
 
 - [Team Members](#introduction)
-- [Features](#features)
 - [Getting Started](#getting-started)
-  - [Prerequisites](#prerequisites)
-  - [Installation](#installation)
-- [Usage](#usage)
+- [Integration](#integration)
 - [Additional Resources](#additional-resources)
 - [Acknowledgments](#acknowledgments)
 
@@ -21,8 +18,6 @@ a _PID controller_ enhances the car's control system, ensuring smooth and accura
 - Nur Hakeem Bin Azman (2201052)
 - Joshua Lim (2200687)
 - Shaun Tay (2200555)
-  
-## Features
 
 ## Getting Started
 
@@ -83,6 +78,8 @@ This algorithm can work for finding an "exit" but when the robot first enters th
   [https://www.youtube.com/watch?v=z9sm6G5alp8](https://www.youtube.com/watch?v=z9sm6G5alp8)
   
 </details>
+
+## Block Diagram & Flowchart
 
 ### Block Diagram
 https://drive.google.com/file/d/1rzfYkl3jkq1JCDhGWVK9S4dcBDvNVrC3/view?usp=sharing
