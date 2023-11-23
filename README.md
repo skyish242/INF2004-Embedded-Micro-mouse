@@ -89,7 +89,6 @@ This algorithm can work for finding an "exit" but when the robot first enters th
 </details>
 
 Block Diagram
-
 https://drive.google.com/file/d/1rzfYkl3jkq1JCDhGWVK9S4dcBDvNVrC3/view?usp=sharing
 ![Block Diagram Micromouse](https://github.com/skyish242/INF2004-Embedded-Micro-mouse/assets/46911283/e8e6b7a7-16f2-4d11-ade5-0a2eab0d12fc)
 
