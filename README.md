@@ -27,8 +27,20 @@ a _PID controller_ enhances the car's control system, ensuring smooth and accura
 ## Getting Started
 
 ### Project Description
+This engaging undergraduate project challenges students to create an intelligent autonomous 2-wheel robot car using the Raspberry Pi Pico microcontroller, equipped
+with various sensors and a PID (Proportional-Integral-Derivative) controller. The primary goal is to develop a robot car that navigates a predefined track, efficiently
+avoiding obstacles and recognizing barcodes using infrared sensors. The integration of a PID controller enhances the car's control system, ensuring smooth and accurate
+motion during navigation and barcode scanning.
 
 ### Sensors/Parts Needed
+1. Robot Car Construction: Assemble and construct the 2-wheel robot car, ensuring mechanical stability and precision wheel control.
+2. Sensor Integration: Integrate ultrasonic sensors for obstacle detection, infrared sensors for line following and barcode recognition, and a magnetometer for
+orientation.
+3. Navigation and Mapping: Implement navigation algorithms that guide the robot car along the track, while avoiding obstacles and optimizing for efficiency.
+4. Barcode Recognition: Develop algorithms to enable the car to detect and interpret barcodes on the ground using infrared sensors.
+5. PID Controller: Design and implement a PID controller to regulate the robot car's speed and steering, ensuring smooth and precise movement.
+6. Efficiency and Speed Optimization: Optimize the navigation and PID control algorithms to achieve the shortest track completion time while accurately
+recognizing barcodes.
 
 ## Integration
 ![EmbeddedDiagram](https://github.com/skyish242/INF2004-Embedded-Micro-mouse/assets/46911283/e2605169-2ba2-4549-96ea-a6ee783fa92c)
