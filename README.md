@@ -24,20 +24,14 @@ a _PID controller_ enhances the car's control system, ensuring smooth and accura
   
 ## Features
 
-### Interactive UI
-### Objection Detection and Avoidance
-### Line Tracking with Infrared Sensor
-### Barcode Reading with Infrared Sensor
-### PID Controller for Navigation
-### Maze Mapping Algorithm
-
 ## Getting Started
 
-### Prerequisites
+### Project Description
 
-### Installation
+### Sensors/Parts Needed
 
-## Usage
+## Integration
+![EmbeddedDiagram](https://github.com/skyish242/INF2004-Embedded-Micro-mouse/assets/46911283/e2605169-2ba2-4549-96ea-a6ee783fa92c)
 
 ## Additional Resources
 
@@ -67,9 +61,6 @@ This algorithm can work for finding an "exit" but when the robot first enters th
   [https://www.youtube.com/watch?v=z9sm6G5alp8](https://www.youtube.com/watch?v=z9sm6G5alp8)
   
 </details>
-
-### Connection Diagram
-![EmbeddedDiagram](https://github.com/skyish242/INF2004-Embedded-Micro-mouse/assets/46911283/e2605169-2ba2-4549-96ea-a6ee783fa92c)
 
 ### Block Diagram
 https://drive.google.com/file/d/1rzfYkl3jkq1JCDhGWVK9S4dcBDvNVrC3/view?usp=sharing
