@@ -9,7 +9,7 @@ a _PID controller_ enhances the car's control system, ensuring smooth and accura
 - [Getting Started](#getting-started)
 - [Integration](#integration)
 - [Additional Resources](#additional-resources)
-- [Block Diagram & Flowcharts](#block-diagram-&-flowchart)
+- [Block Diagram & Flowcharts](#block-diagram--flowchart)
 
 ## Team Members
 
