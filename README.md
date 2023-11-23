@@ -8,6 +8,7 @@ a _PID controller_ enhances the car's control system, ensuring smooth and accura
 - [Team Members](#introduction)
 - [Getting Started](#getting-started)
 - [Integration](#integration)
+- [GPIO Pins](#gpio-pins)
 - [Additional Resources](#additional-resources)
 - [Block Diagram & Flowcharts](#block-diagram--flowchart)
 
@@ -51,7 +52,7 @@ recognizing barcodes.
 ![EmbeddedDiagram](https://github.com/skyish242/INF2004-Embedded-Micro-mouse/assets/46911283/e2605169-2ba2-4549-96ea-a6ee783fa92c)
 
 ## GPIO Pins
-| Pin Number  | Usage         |
+| 'Pin Number'| 'Usage'     |
 | ------------|:-------------:|
 | GPIO 0      |               |
 | GPIO 1      |               |
