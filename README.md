@@ -66,6 +66,9 @@ This algorithm can work for finding an "exit" but when the robot first enters th
 [https://www.youtube.com/watch?v=Zwh-QNlsurI](https://www.youtube.com/watch?v=Zwh-QNlsurI)
 [https://www.youtube.com/watch?v=ktn3C7aXVR0&t=172s](https://www.youtube.com/watch?v=ktn3C7aXVR0&t=172s)
 
+### GY511 LSM303DLHC Documentation
+https://cdn-shop.adafruit.com/datasheets/LSM303DLHC.PDF
+
 ### Depth-First Maze Solver
 *****
 [https://www.youtube.com/watch?v=zalhUp4ms6c](https://www.youtube.com/watch?v=zalhUp4ms6c)
