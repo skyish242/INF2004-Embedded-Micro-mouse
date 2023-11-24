@@ -6,6 +6,7 @@ a _PID controller_ enhances the car's control system, ensuring smooth and accura
 ## Table of Contents
 
 - [Team Members](#team-members)
+- [Contributions](#contributions)
 - [Getting Started](#getting-started)
 - [Integration](#integration)
 - [GPIO Pins](#gpio-pins)
@@ -19,6 +20,16 @@ a _PID controller_ enhances the car's control system, ensuring smooth and accura
 - Nur Hakeem Bin Azman (2201052)
 - Joshua Lim (2200687)
 - Shaun Tay (2200555)
+
+## Contributions
+| `Member's Name`          | `Contributions`|
+| -------------------------|:--------------:|
+| Ong Si Hui                | Motor, Wheel Encoder, Integration, Documentation |
+| Pang Zi Jian, Adrian      | Web Server, Mapping, Integration, Documentation  |
+| Nur Hakeem Bin Azman      | Magnetometer, Integration, Documentation         |
+| Joshua Lim                | IR Sensors, Integration, Documentation           |
+| Shaun Tay                 | Ultrasonic Sensors, Integration, Documentation   |
+
 
 ## Getting Started
 
