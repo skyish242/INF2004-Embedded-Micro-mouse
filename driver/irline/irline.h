@@ -21,4 +21,6 @@ void reverseBinaryArray(int binaryArray[9], int reversedArray[9]);
 
 bool timer_callback(struct repeating_timer *t);
 
-void detectLine();
+int detectLine(int adc_input);
+
+void ir_init();

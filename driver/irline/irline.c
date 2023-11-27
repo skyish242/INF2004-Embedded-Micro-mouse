@@ -243,25 +243,32 @@ bool timer_callback(struct repeating_timer *t) {
     return true;
 }
 
-void detectLine(){
-    adc_select_input(0);
+int detectLine(int adc_input){
+    adc_select_input(adc_input);
     uint16_t adc_value = adc_read();
-    printf("%d\n", adc_value);
-    sleep_ms(500);
+    // printf("%d\n", adc_value);
+    return adc_value;
 }
 
-int main(void) {
-    stdio_init_all();
+void ir_init(){
     adc_init();
-    adc_gpio_init(26);
-
-    struct repeating_timer timer;
-
-    add_repeating_timer_ms(50, timer_callback, NULL, &timer);
-
-    while (true) {
-        // detectLine();
-    }
-
-    return 0;
+    adc_gpio_init(26); // Left IR
+    adc_gpio_init(27); // Right IR
+    adc_gpio_init(28); // Barcode IR
 }
+
+// int main(void) {
+//     stdio_init_all();
+//     adc_init();
+//     adc_gpio_init(26);
+
+//     struct repeating_timer timer;
+
+//     add_repeating_timer_ms(50, timer_callback, NULL, &timer);
+
+//     while (true) {
+//         printf("%d", detectLine(1));
+//     }
+
+//     return 0;
+// }

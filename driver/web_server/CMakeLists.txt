@@ -15,6 +15,8 @@ add_executable(${PROGRAM_NAME}
 target_include_directories(${PROGRAM_NAME} PUBLIC
     ${CMAKE_CURRENT_LIST_DIR}
     ${CMAKE_SOURCE_DIR}/driver/motor # Include the motor directory
+    ${CMAKE_SOURCE_DIR}/driver/mapping  # Include the mapping directory
+    ${CMAKE_SOURCE_DIR}/driver/magnometer  # Include the mapping directory
 )
 
 target_link_libraries(${PROGRAM_NAME}
@@ -23,9 +25,11 @@ target_link_libraries(${PROGRAM_NAME}
     pico_stdlib
     hardware_adc
     motorLib
+    floodfillLib
+    magnoLib
 )
 
 pico_enable_stdio_usb(${PROGRAM_NAME} TRUE)
-pico_enable_stdio_uart(${PROGRAM_NAME} FALSE)
+# pico_enable_stdio_uart(${PROGRAM_NAME} FALSE)
 
 pico_add_extra_outputs(${PROGRAM_NAME})

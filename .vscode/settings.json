@@ -1,0 +1,9 @@
+{
+    "files.associations": {
+        "pwm.h": "c",
+        "stdlib.h": "c",
+        "motor.h": "c",
+        "irline.h": "c",
+        "stdio.h": "c"
+    }
+}

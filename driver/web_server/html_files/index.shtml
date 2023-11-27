@@ -44,8 +44,12 @@
             <div class="led_controller">
             <h2>LED Controller:</h2>
             <p>LED is: <!--#led--></p>
-            <a href="/led.cgi?led=1"><button>LED ON</button></a>
+            <a href="/led.cgi?led=1"><button>LED KEK</button></a>
             <a href="/led.cgi?led=0"><button>LED OFF</button></a>
+            </div>
+            <div class="led_controller">
+                <h2>Start Mapping</h2>
+                <a href="/start_map.cgi"><button>Start Map</button></a>
             </div>
             <br>
             <br>
