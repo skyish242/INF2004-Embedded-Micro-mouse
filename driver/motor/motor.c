@@ -187,14 +187,14 @@ void turnLeft(){
     stopMotors();
 }
 
-void shakeLeft(){
+void shakeLeft(bool to_check){
     // Constants for turning
-    const int targetNotchCount = 5 * 20 / 360; // 90 degrees in encoder notches
+    const float targetNotchCount = (float)5 * 20 / 360; // 90 degrees in encoder notches
 
     // // Reset encoders
     // resetNotchCount();
-    int left_counter = 0;
-    int right_counter = 0;
+    float left_counter = 0.0;
+    float right_counter = 0.0;
 
     //Set the motor to move left mode
     moveLeft();
@@ -205,10 +205,16 @@ void shakeLeft(){
         setSpeed(SHAKE_SPEED);
         left_counter += 1;
         right_counter +=1;
-        if(detectLine(1) < LINE_THRESHOLD)
-            turn_left = true;
-        if(detectLine(1) > LINE_THRESHOLD)
-            turn_left = false;
+        if(to_check){
+            if(detectLine(1) < LINE_THRESHOLD){
+                printf("less than line threshold");
+                turn_left = true;
+            }
+            if(detectLine(1) > LINE_THRESHOLD){
+                printf("more than line threshold");
+                turn_left = false;
+            }
+        }
         sleep_ms(100);
     }
     stopMotors();
@@ -239,27 +245,34 @@ void turnRight(){
 }
 
 
-void shakeRight(){
+void shakeRight(bool to_check){
     // Constants for turning
-    const int targetNotchCount = 5 * 20 / 360; // 90 degrees in encoder notches
-    int left_counter = 0;
-    int right_counter = 0;
+    const float targetNotchCount = (float)5 * 20/360; // 90 degrees in encoder notches
+    float left_counter = 0.0;
+    float right_counter = 0.0;
     // // Reset encoders
     // resetNotchCount();
 
     //Set the motor to move left mode
     moveRight();
-    printf("%d\n", targetNotchCount);
+    printf("%.2f\n", (float)5 * 20/360);
     // While the average of the left and right notch counts is less than the target count
     while ((left_counter + right_counter) / 2 < targetNotchCount) {
         // Control motors to turn left
         setSpeed(SHAKE_SPEED);
         left_counter += 1;
         right_counter +=1;
-        if(detectLine(0) < LINE_THRESHOLD)
-            turn_right = true;
-        if(detectLine(0) > LINE_THRESHOLD)
-            turn_right = false;
+        if(to_check){
+            if(detectLine(0) < LINE_THRESHOLD){
+                printf("less than line threshold\n");
+                turn_right = true;
+            }
+            if(detectLine(0) > LINE_THRESHOLD){
+                printf("more than line threshold\n");
+                turn_right = false;
+            }
+        }
+       
         sleep_ms(100);
     }
 
@@ -296,20 +309,25 @@ int main(){
             //     // continue;
             // }
             if(!(getLeftEncoderDistance() > 16) || !(getRightEncoderDistance() > 16)){
+               
                 if (detectLine(1) > LINE_THRESHOLD ){ // Black left and no black right
-                    shakeRight();
-                    shakeLeft();
+                    shakeRight(true);
+                    shakeLeft(false);
+                    
                 }
                 else if(detectLine(0) > LINE_THRESHOLD ){ // Black Right and no black left
-                    shakeLeft();
-                    shakeRight();   
+                    shakeLeft(true);
+                    shakeRight(false);   
                 }
             }
         }    
         stopMotors();
         resetNotchCount();
         resetEncoderDistance();
-    
+        printf("turn_left: %d\n", turn_left);
+        printf("turn_right: %d\n",turn_right);
+        sleep_ms(100);
+
         if(turn_left){
             printf("left\n");
             // shakeLeft();

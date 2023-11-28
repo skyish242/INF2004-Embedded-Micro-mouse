@@ -51,7 +51,8 @@
 #define BASE_SPEED 25000
 #define SHAKE_SPEED 12000
 
-void motorInit();
+void 
+otorInit();
 void setupPWM(uint gpio);
 void setMotorLeft();
 void setMotorRight();
@@ -65,8 +66,8 @@ void stopMotors();
 void setSpeed(int16_t pwm_value);
 
 void turnLeft();
-void shakeLeft();
+void shakeLeft(bool to_check);
 void turnRight();
-void shakeRight();
+void shakeRight(bool to_check);
 
 #endif /* MOTOR_H */
