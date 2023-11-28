@@ -39,7 +39,7 @@
 #define KP_RIGHT 2.2
 #define KI_RIGHT 2.0
 #define KD_RIGHT 0.0
-#define KP_LEFT 2.0
+#define KP_LEFT 1.8
 #define KI_LEFT 2.0
 #define KD_LEFT 0.0
 
@@ -49,6 +49,7 @@
 #define LEFT_ANGLE 90
 #define RIGHT_ANGLE 90
 #define BASE_SPEED 25000
+#define SHAKE_SPEED 12000
 
 void motorInit();
 void setupPWM(uint gpio);

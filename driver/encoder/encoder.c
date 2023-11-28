@@ -11,7 +11,7 @@
 
 // const uint32_t ENCODER_NOTCHES = 20;
 // const float WHEEL_CIRCUMFERENCE = 21.05;
-const uint32_t ENCODER_NOTCHES = 20;
+const uint32_t ENCODER_NOTCHES = 30;
 const float WHEEL_CIRCUMFERENCE = 22;
 const float DISTANCE_PER_PULSE = 1.1;
 #define ENCODER_CIRCUMFERENCE 8.5
@@ -49,7 +49,7 @@ void encoder_callback(uint gpio, uint32_t events) {
             left_speed = (ENCODER_CIRCUMFERENCE/ENCODER_NOTCHES) / (pulse_width / 1000000.0);
 
             // Print the results
-            printf("Left motor: Speed: %.2f cm/s, Pulse width = %d us, Notch count = %d, Distance = %.2f cm\n", left_speed, pulse_width, left_notch_count, left_encoder_distance );
+            //printf("Left motor: Speed: %.2f cm/s, Pulse width = %d us, Notch count = %d, Distance = %.2f cm\n", left_speed, pulse_width, left_notch_count, left_encoder_distance );
         }
     } else if (gpio == RIGHT_ENCODER_PIN) {
         if (events & GPIO_IRQ_EDGE_RISE) {
@@ -64,7 +64,7 @@ void encoder_callback(uint gpio, uint32_t events) {
             right_encoder_distance = right_notch_count * DISTANCE_PER_PULSE;
             right_speed = (ENCODER_CIRCUMFERENCE/ENCODER_NOTCHES) / (pulse_width / 1000000.0);
             
-            printf("Right motor: Speed: %.2f cm/s, Pulse width = %d us, Notch count = %d, Distance = %.2f cm\n", right_speed, pulse_width, right_notch_count, right_encoder_distance );
+            //printf("Right motor: Speed: %.2f cm/s, Pulse width = %d us, Notch count = %d, Distance = %.2f cm\n", right_speed, pulse_width, right_notch_count, right_encoder_distance );
         }
     }
 }
