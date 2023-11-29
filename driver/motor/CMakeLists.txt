@@ -14,7 +14,7 @@ target_include_directories(motorLib PUBLIC
     ${CMAKE_SOURCE_DIR}/driver/encoder
     ${CMAKE_SOURCE_DIR}/driver/magnometer
     ${CMAKE_SOURCE_DIR}/driver/irline
-    # ${CMAKE_SOURCE_DIR}/driver/web_server # Include the motor directory
+    ${CMAKE_SOURCE_DIR}/driver/web_server # Include the motor directory
 )
 
 target_include_directories(motor PRIVATE

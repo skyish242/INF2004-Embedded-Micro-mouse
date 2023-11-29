@@ -209,5 +209,13 @@ int32_t get_angle(mag_t *mag) {
       angle_deg += 360;
    }
 
+//   const double calibration_offset = 28.0; // Adjust as needed
+//    angle_deg -= calibration_offset;
+
+//    // Ensure that the angle is within the 0-360 degree range
+//    if (angle_deg >= 360) {
+//       angle_deg -= 360;
+//    }
+
    return (int32_t) angle_deg;
 }

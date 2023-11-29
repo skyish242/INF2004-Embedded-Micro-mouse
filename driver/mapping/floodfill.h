@@ -4,6 +4,8 @@
 #include <stdio.h>
 #include <stdbool.h>
 #include <math.h>
+#include "pico/stdlib.h"
+#include <stdlib.h>
 #include "motor.h"
 // #include "magnometer.h"
 

@@ -4,7 +4,7 @@
 #include "pico/cyw43_arch.h"
 
 #include "sensor_data.h"
-#include "motor.h"
+// #include "motor.h"
 #include "floodfill.h"
 
 char* map_stringfy(int map[16][16]){

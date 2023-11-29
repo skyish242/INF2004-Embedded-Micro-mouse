@@ -8,9 +8,8 @@
 #include "lwip/netif.h"
 
 #include "sensor_data.h"
-#include "motor.h"
 #include "magnometer.h"
-
+#include "irline.h"
 // #include "ultrasonic.h"
 
 // WIFI Credentials - take care if pushing to github!
@@ -51,19 +50,6 @@ int main() {
     printf("Connected! \n");
     print_ip_address();
 
-    // Init motor
-    motorInit();
-    
-    // Init Magnometer
-    init_i2c_default();
-    lsm303dlh_acc_setup();
-    lsm303dlh_mag_setup();
-
-    // Set up the interrupt to trigger encoder_callback when rising edge is detected
-    gpio_set_irq_enabled_with_callback(LEFT_ENCODER_PIN, GPIO_IRQ_EDGE_RISE, true, &encoder_callback);
-    gpio_set_irq_enabled_with_callback(RIGHT_ENCODER_PIN, GPIO_IRQ_EDGE_RISE, true, &encoder_callback);
-    printf("Motor initialised\n");
-
     // Initialise web server
     httpd_init();
     printf("Http server initialised\n");
@@ -74,6 +60,23 @@ int main() {
     cgi_init();
     printf("CGI Handler initialised\n");
     
+
+    // Init motor
+    motorInit();
+    
+    // Set up the interrupt to trigger encoder_callback when rising edge is detected
+    gpio_set_irq_enabled_with_callback(LEFT_ENCODER_PIN, GPIO_IRQ_EDGE_RISE, true, &encoder_callback);
+    gpio_set_irq_enabled_with_callback(RIGHT_ENCODER_PIN, GPIO_IRQ_EDGE_RISE, true, &encoder_callback);
+    printf("Motor initialised\n");
+
+    // Init IR Sensors
+    ir_init();
+    printf("IR initialised\n");
+    
+    // Init Magnometer
+    magnometer_init();
+    printf("Magnometer initialised\n");
+
     // Infinite loop
     while(1);
 }

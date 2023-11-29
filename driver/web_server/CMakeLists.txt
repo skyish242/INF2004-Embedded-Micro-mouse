@@ -17,6 +17,7 @@ target_include_directories(${PROGRAM_NAME} PUBLIC
     ${CMAKE_SOURCE_DIR}/driver/motor # Include the motor directory
     ${CMAKE_SOURCE_DIR}/driver/mapping  # Include the mapping directory
     ${CMAKE_SOURCE_DIR}/driver/magnometer  # Include the mapping directory
+    ${CMAKE_SOURCE_DIR}/driver/irline  # Include the mapping directory
 )
 
 target_link_libraries(${PROGRAM_NAME}
@@ -24,9 +25,11 @@ target_link_libraries(${PROGRAM_NAME}
     pico_lwip_http
     pico_stdlib
     hardware_adc
+    hardware_pwm
     motorLib
     floodfillLib
     magnoLib
+    IRLib
 )
 
 pico_enable_stdio_usb(${PROGRAM_NAME} TRUE)

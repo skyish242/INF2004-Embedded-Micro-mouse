@@ -1,3 +1,6 @@
+#ifndef IRLINE_H
+#define IRLINE_H
+
 #include <stdio.h>
 #include "pico/stdlib.h"
 #include "hardware/gpio.h"
@@ -24,3 +27,5 @@ bool timer_callback(struct repeating_timer *t);
 int detectLine(int adc_input);
 
 void ir_init();
+
+#endif

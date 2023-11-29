@@ -1,6 +1,4 @@
 #include "floodfill.h"
-#include "pico/stdlib.h"
-#include <stdlib.h>
 
 #define IS_IN_BOUNDS(x, y) ((x) >= 0 && (x) < (HEIGHT) && (y) >= 0 && (y) < (WIDTH))
 bool NOT_MAP_COMPLETE = true;
@@ -46,70 +44,70 @@ const Direction DIRECTIONS[] = {
     { 1, 0 }    // SOUTH
 };
 
-void check_neighbour(struct wall_maze* maze, struct dist_maze* distances, struct coor current, int top, int left, int right, int bottom){
+// void check_neighbour(struct wall_maze* maze, struct dist_maze* distances, struct coor current, int top, int left, int right, int bottom){
     
-    if ( IS_IN_BOUNDS(current.x, current.y) ) {
-        // Set motor to roll back one cell length without turning 
+    // if ( IS_IN_BOUNDS(current.x, current.y) ) {
+    //     // Set motor to roll back one cell length without turning 
 
-    }else{ // Out of bound
-        return;
-    }
+    // }else{ // Out of bound
+    //     return;
+    // }
 
-    // if both side have walls
-    if(maze->cells[current.x][current.y].walls[left] && maze->cells[current.x][current.y].walls[right]){
-        //roll back
-        Direction dir = DIRECTIONS[bottom];
+    // // if both side have walls
+    // if(maze->cells[current.x][current.y].walls[left] && maze->cells[current.x][current.y].walls[right]){
+    //     //roll back
+    //     Direction dir = DIRECTIONS[bottom];
 
-        // Update coordinates based on the direction changes
-        current.x += dir.dx;
-        current.y += dir.dy;
-    }else{
-        Direction dir_left =  DIRECTIONS[left];
-        struct coor next_coor_l = {current.x + dir_left.dx, current.y + dir_left.dy};
-        Direction dir_right =  DIRECTIONS[right];
-        struct coor next_coor_r = {current.x + dir_right.dx, current.y + dir_right.dy};
-        Direction dir_btm =  DIRECTIONS[bottom];
-        struct coor next_coor_b = {current.x + dir_btm.dx, current.y + dir_btm.dy};
+    //     // Update coordinates based on the direction changes
+    //     current.x += dir.dx;
+    //     current.y += dir.dy;
+    // }else{
+    //     Direction dir_left =  DIRECTIONS[left];
+    //     struct coor next_coor_l = {current.x + dir_left.dx, current.y + dir_left.dy};
+    //     Direction dir_right =  DIRECTIONS[right];
+    //     struct coor next_coor_r = {current.x + dir_right.dx, current.y + dir_right.dy};
+    //     Direction dir_btm =  DIRECTIONS[bottom];
+    //     struct coor next_coor_b = {current.x + dir_btm.dx, current.y + dir_btm.dy};
         
         
-        // Check any neighbour cell is unvisted
+    //     // Check any neighbour cell is unvisted
     
-        if(neighbour_value_visitation(&maze,&distances, current, next_coor_l, top)){ // Check current left
-            return;
-        }
+    //     if(neighbour_value_visitation(&maze,&distances, current, next_coor_l, top)){ // Check current left
+    //         return;
+    //     }
             
-        if(neighbour_value_visitation(&maze,&distances, current, next_coor_r, top)){ // Check current right
-            return;
-        }    
-        if(neighbour_value_visitation(&maze,&distances, current, next_coor_b, top)){// Check current bottom
-            // Car turn right
-            return;
-        }
+    //     if(neighbour_value_visitation(&maze,&distances, current, next_coor_r, top)){ // Check current right
+    //         return;
+    //     }    
+    //     if(neighbour_value_visitation(&maze,&distances, current, next_coor_b, top)){// Check current bottom
+    //         // Car turn right
+    //         return;
+    //     }
 
-        // Check which neighbour cell has smaller distance (prioritise left)
-        if(neighbour_value_distance(&maze,&distances, current, next_coor_l, top)){// Check current left
-            // Car turn right 
-            current = next_coor_l;
-            check_neighbour(&maze,&distances,current, right, top, bottom, left);
-            return;
-        }
-        if(neighbour_value_distance(&maze,&distances, current, next_coor_r, top)){// Check current right
-            // Car turn left
-            current = next_coor_r;
-            check_neighbour(&maze,&distances,current,left, bottom, top, right);
-            return;
-        }
-        if(neighbour_value_distance(&maze,&distances, current, next_coor_b, top)){// Check current bottom
-            // Set to roll back
-            current = next_coor_b;
-            check_neighbour(&maze,&distances,current,top, left, right, bottom);
-            return;
-        }
+    //     // Check which neighbour cell has smaller distance (prioritise left)
+    //     if(neighbour_value_distance(&maze,&distances, current, next_coor_l, top)){// Check current left
+    //         // Car turn right 
+    //         current = next_coor_l;
+    //         check_neighbour(&maze,&distances,current, right, top, bottom, left);
+    //         return;
+    //     }
+    //     if(neighbour_value_distance(&maze,&distances, current, next_coor_r, top)){// Check current right
+    //         // Car turn left
+    //         current = next_coor_r;
+    //         check_neighbour(&maze,&distances,current,left, bottom, top, right);
+    //         return;
+    //     }
+    //     if(neighbour_value_distance(&maze,&distances, current, next_coor_b, top)){// Check current bottom
+    //         // Set to roll back
+    //         current = next_coor_b;
+    //         check_neighbour(&maze,&distances,current,top, left, right, bottom);
+    //         return;
+    //     }
 
-        //Else all neighbour cell is visited and all neihhbour cell has higher value
-        // Mapping completed
-        NOT_MAP_COMPLETE = false;
-    }
+    //     //Else all neighbour cell is visited and all neihhbour cell has higher value
+    //     // Mapping completed
+    //     NOT_MAP_COMPLETE = false;
+    // }
 
     //Check from 
 
@@ -140,7 +138,7 @@ void check_neighbour(struct wall_maze* maze, struct dist_maze* distances, struct
    
     // }
 
-}
+// }
 
 // void check_neighbour(struct wall_maze* maze, struct dist_maze* distances, struct coor current, int currentDirection){
 
@@ -311,111 +309,14 @@ void advance_one_cell(struct wall_maze* maze, struct dist_maze* distances, struc
 
     int cur_encoder_value = 0;
     struct coor next_coord = current;
-    bool left_wall = 0;
-    bool right_wall = 0;
-    // while(1){
-    //     moveForward();
-    //     setMotorLeft();
-    //     setMotorRight();
+    // bool left_wall = 0;
+    // bool right_wall = 0;
 
-    // }
- 
-    // int target_bearing = -90;
-
-    // while (1) {
-    //     current_bearing = get_direction() - 1;
-
-    //     if (current_bearing < -180) {
-    //         current_bearing += 360;
-    //     } else if (current_bearing > 180) {
-    //         current_bearing -= 360;
-    //     }
-
-    //     if (fabs(current_bearing - target_bearing) < 2) {
-    //         break;
-    //     }
-
-    //     moveLeft();
-    //     setSpeed(12500 / 2);
-    // }
-
-    //Move left
-    int current_bearing = get_direction();
-    int target_bearing = current_bearing - 90;
-
-    if (target_bearing < 0) {
-        target_bearing += 360;
-    }
-
-    printf("Target: %d\n", target_bearing);
-
-    while (1) {
-        moveLeft();
-        setSpeed(7500);
-
-         int current_direction = get_direction();
-
-        // Adjust current_direction to handle wraparound
-        if (current_direction < -180) {
-            current_direction += 360;
-        } else if (current_direction > 180) {
-            current_direction -= 360;
-        }
-
-        // Check if the car has reached the target direction
-        if (fabs(current_direction - target_bearing) < 2 || fabs(current_direction - target_bearing) > 358) {
-            break;
-        }
-        // printf("Current %d\n", current_direction);
-    }
-
-    stopMotors();
-    printf("After bearing: %d\n", get_direction());
-
-    // int current_bearing = get_direction();
-    // int target_bearing =( current_bearing - 90 + 360) % 360;  // Target bearing in degrees
-    // int pwmValue = 1000;         // Initial PWM value
-
-    // while (current_bearing < target_bearing) {
-    //     // Adjust the PWM value based on your control strategy
-    //     pwmValue += 00;  // Adjust this based on your specific system
-    //     moveLeft();
-    //     setSpeed(pwmValue);
-
-    //     // Simulate a small delay or check sensors to get the updated bearing
-    //     usleep(100000);  // Sleep for 100 milliseconds (adjust as needed)
-
-    //     // Update the current bearing (replace this with actual code to get current bearing)
-    //     current_bearing = get_direction();
-    // }
-
-    // stopMotors();
-    // printf("Reached: %d", get_direction());
-    
-    // printf("Hello Wordl");
-    // int counter = 0;
-    // while(1){
-    //     startUltra();
-    //     if(counter == 5){
-    //         break;
-    //     }
-    //     counter++;
-    // }
-    // printf("hello World2");
     // Moving forward
     // Call motor to move forward one cell and get encoder value back continously
-    // while (cur_encoder_value < MAX_CELL_LENGTH){
-    //     // When reached half a cell
-    //     if (cur_encoder_value >= (MAX_CELL_LENGTH/2)){
-    //         // ir check for walls
-    //         if(right_wall){ // right wall
-    //             right_wall = 1;
-    //         }
-    //         if(left_wall){ // left wall
-    //             left_wall = 1;   
-    //         }
-    //     }
-    // }
+    moveOneCell();
+    printf("Leftwall: %d\n", left_wall);
+    printf("Rightwall: %d\n", right_wall);
 
     // Check the current direction
     // Set the wall of the current cell the robot is at 

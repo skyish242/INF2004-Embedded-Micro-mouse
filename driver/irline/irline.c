@@ -255,7 +255,17 @@ void ir_init(){
     adc_gpio_init(26); // Left IR
     adc_gpio_init(27); // Right IR
     adc_gpio_init(28); // Barcode IR
+    printf("Meow");
 }
+
+// int main(){
+//     stdio_init_all();
+//     ir_init();
+//     while (true) {
+//         printf("%d\n", detectLine(0));
+//     }
+//     return 0;
+// }
 
 // int main(void) {
 //     stdio_init_all();

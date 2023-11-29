@@ -14,11 +14,6 @@
 #define IN3 11  // Input 1 for Motor B
 #define IN4 10  // Input 2 for Motor B
 
-// #define IN1 6  // Input 1 for Motor A
-// #define IN2 7  // Input 2 for Motor A
-// #define IN3 3  // Input 1 for Motor B
-// #define IN4 4  // Input 2 for Motor B
-
 // Define GPIO pins for PWM
 #define LEFT_MOTOR_PWM 0
 #define RIGHT_MOTOR_PWM 1
@@ -46,13 +41,15 @@
 // Define turning angle
 // Small: 
 // Big: 
-#define LEFT_ANGLE 90
-#define RIGHT_ANGLE 90
+#define LEFT_ANGLE 110
+#define RIGHT_ANGLE 110
 #define BASE_SPEED 25000
 #define SHAKE_SPEED 12000
 
-void 
-otorInit();
+extern volatile bool left_wall;
+extern volatile bool right_wall;
+
+void motorInit();
 void setupPWM(uint gpio);
 void setMotorLeft();
 void setMotorRight();
@@ -66,8 +63,9 @@ void stopMotors();
 void setSpeed(int16_t pwm_value);
 
 void turnLeft();
-void shakeLeft(bool to_check);
+void shakeLeft();
 void turnRight();
-void shakeRight(bool to_check);
+void shakeRight();
+void moveOneCell();
 
 #endif /* MOTOR_H */

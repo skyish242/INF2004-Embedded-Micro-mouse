@@ -12,7 +12,6 @@ target_include_directories(floodfillLib PUBLIC
     ${CMAKE_CURRENT_LIST_DIR}
     ${CMAKE_CURRENT_SOURCE_DIR}
     ${CMAKE_SOURCE_DIR}/driver/motor # Include the motor directory
-    ${CMAKE_SOURCE_DIR}/driver/magnometer
 )
 
 # pico_enable_stdio_usb(floodfill 1)

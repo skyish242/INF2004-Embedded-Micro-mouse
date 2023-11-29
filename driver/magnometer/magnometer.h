@@ -1,3 +1,5 @@
+#ifndef MAGNOMETER_H
+#define MAGNOMETER_H
 // Include necessary libraries for input/output, mathematics, and data types
 #include <stdio.h>
 #include <math.h>
@@ -55,3 +57,5 @@ int32_t get_angle(mag_t *mag);
 void init_i2c_default();
 
 void magnometer_init();
+
+#endif

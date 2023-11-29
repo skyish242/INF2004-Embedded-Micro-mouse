@@ -11,7 +11,7 @@
 
 // const uint32_t ENCODER_NOTCHES = 20;
 // const float WHEEL_CIRCUMFERENCE = 21.05;
-const uint32_t ENCODER_NOTCHES = 30;
+const uint32_t ENCODER_NOTCHES = 20;
 const float WHEEL_CIRCUMFERENCE = 22;
 const float DISTANCE_PER_PULSE = 1.1;
 #define ENCODER_CIRCUMFERENCE 8.5
