@@ -207,6 +207,7 @@ bool timer_callback(struct repeating_timer *t) {
             }
         }
 
+        // Does the same for the reversed character
         else if (reversedCharBarcode == '*'){
             reversed = true;
             if (barcodeReading[0] == '*') {
@@ -254,20 +255,15 @@ bool timer_callback(struct repeating_timer *t) {
     return true;
 }
 
+// This function takes in the ADC input number based on the PICO W and returns the ADC reading back
 int detectLine(int adc_input){
-    while (true) {
-        adc_select_input(adc_input);
-        uint16_t adc_value = adc_read();
-        printf("ADC Value: %d\n", adc_value);
-        // if (adc_value >= LINE_THRESHOLD) {
-        //     return true;
-        // }
-        // else {
-        //     return false;
-        // }
-    }
+    adc_select_input(adc_input);
+    uint16_t adc_value = adc_read();
+    printf("ADC Value: %d\n", adc_value);
+    return adc_value;
 }
 
+// This is the function to scan the barcode during actual runs
 int scan_barcode() {
     stdio_init_all();
     adc_init();
@@ -275,7 +271,7 @@ int scan_barcode() {
 
     struct repeating_timer timer;
 
-    add_repeating_timer_ms(50, timer_callback, NULL, &timer);
+    add_repeating_timer_ms(1, timer_callback, NULL, &timer);
 
     while (true) {
         // detectLine();
